@@ -114,12 +114,12 @@ export const ProductDetail = () => {
         </nav>
 
         {/* Ficha Principal de Producto (Grid 2 Columnas) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-start">
           
           {/* Columna Izquierda: Galería de Imágenes */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {/* Imagen Principal en Gran Formato */}
-            <div className="relative aspect-square overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-xl group">
+            <div className="relative aspect-square overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-gray-100 shadow-xl group">
               <img
                 src={activeImage}
                 alt={product.name}
@@ -131,13 +131,13 @@ export const ProductDetail = () => {
             </div>
 
             {/* Fila de 3 Miniaturas Interactivas */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4">
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
               {galleryImages.map((imgSrc, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setActiveImage(imgSrc)}
-                  className={`relative aspect-square rounded-2xl overflow-hidden bg-white border transition-all ${
+                  className={`relative aspect-square rounded-xl sm:rounded-2xl overflow-hidden bg-white border transition-all touch-manipulation cursor-pointer ${
                     activeImage === imgSrc
                       ? 'ring-2 ring-emerald-500 border-emerald-500 shadow-md scale-102'
                       : 'border-gray-200 hover:border-gray-300 opacity-80 hover:opacity-100'
@@ -155,7 +155,7 @@ export const ProductDetail = () => {
           </div>
 
           {/* Columna Derecha: Información y Compra */}
-          <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-100 shadow-sm space-y-7">
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 border border-gray-100 shadow-sm space-y-6 sm:space-y-7">
             
             {/* Header del Producto */}
             <div>
@@ -168,14 +168,14 @@ export const ProductDetail = () => {
                   {product.category || 'Colección Urbana'}
                 </span>
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
                 {product.name}
               </h1>
             </div>
 
             {/* Precio Destacado */}
             <div>
-              <div className="text-3xl sm:text-4xl font-extrabold text-emerald-600 bg-emerald-50/80 px-5 py-2.5 rounded-2xl inline-block shadow-sm">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-emerald-600 bg-emerald-50/80 px-4 sm:px-5 py-2 sm:py-2.5 rounded-2xl inline-block shadow-sm">
                 {product.price}
               </div>
               <p className="mt-1.5 text-xs text-gray-400 font-medium">
@@ -184,12 +184,12 @@ export const ProductDetail = () => {
             </div>
 
             {/* Descripción */}
-            <p className="text-base text-gray-600 leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
               {product.description}
             </p>
 
             {/* Viñetas de Detalles de Valor Técnicos */}
-            <div className="space-y-2.5 pt-4 border-t border-gray-100 text-sm text-gray-600">
+            <div className="space-y-2.5 pt-4 border-t border-gray-100 text-xs sm:text-sm text-gray-600">
               <div className="flex items-start gap-2.5">
                 <span className="text-base">👟</span>
                 <div>
@@ -232,10 +232,10 @@ export const ProductDetail = () => {
                     key={size}
                     type="button"
                     onClick={() => setSelectedSize(size)}
-                    className={`w-12 h-12 rounded-xl font-bold text-sm flex items-center justify-center transition-all ${
+                    className={`w-11 h-11 sm:w-12 sm:h-12 min-h-[44px] min-w-[44px] rounded-xl font-bold text-sm flex items-center justify-center transition-all touch-manipulation cursor-pointer ${
                       selectedSize === size
                         ? 'bg-emerald-800 text-white shadow-md shadow-emerald-900/30 scale-105 border-2 border-emerald-800'
-                        : 'bg-gray-100 hover:bg-gray-200 text-gray-800 border border-gray-200'
+                        : 'bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-gray-800 border border-gray-200'
                     }`}
                     aria-label={`Seleccionar talla ${size}`}
                     aria-pressed={selectedSize === size}
@@ -251,7 +251,7 @@ export const ProductDetail = () => {
               <button
                 type="button"
                 onClick={handleWhatsAppClick}
-                className="w-full min-h-[52px] rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-base sm:text-lg shadow-lg shadow-emerald-600/25 inline-flex items-center justify-center gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 cursor-pointer"
+                className="w-full min-h-[52px] rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-base sm:text-lg shadow-lg shadow-emerald-600/25 inline-flex items-center justify-center gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 cursor-pointer touch-manipulation"
                 aria-label={`Comprar ${product.name} por WhatsApp`}
               >
                 <WhatsAppIcon className="w-6 h-6 shrink-0" />
@@ -259,15 +259,15 @@ export const ProductDetail = () => {
               </button>
 
               {/* Micro-Garantías de Confianza */}
-              <div className="flex items-center justify-center gap-4 text-xs text-gray-400 font-medium pt-1">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs text-gray-400 font-medium pt-1">
                 <span className="flex items-center gap-1">
                   <span>🔒</span> Compra segura
                 </span>
-                <span>•</span>
+                <span className="hidden sm:inline">•</span>
                 <span className="flex items-center gap-1">
                   <span>📦</span> Envíos a todo el país
                 </span>
-                <span>•</span>
+                <span className="hidden sm:inline">•</span>
                 <span className="flex items-center gap-1">
                   <span>⚡</span> Respuesta rápida
                 </span>
@@ -279,8 +279,8 @@ export const ProductDetail = () => {
         </div>
 
         {/* Sección Cross-selling (Venta Cruzada) con Botones 'Ver más' */}
-        <section className="mt-20 pt-12 border-t border-gray-200" aria-label="Productos recomendados">
-          <div className="flex items-center justify-between mb-8">
+        <section className="mt-12 sm:mt-20 pt-8 sm:pt-12 border-t border-gray-200" aria-label="Productos recomendados">
+          <div className="flex items-center justify-between mb-6 sm:mb-8">
             <div>
               <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider">
                 Recomendados
@@ -295,7 +295,7 @@ export const ProductDetail = () => {
               <button
                 type="button"
                 onClick={() => scrollCarousel('left')}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-100 hover:text-gray-900 active:scale-95 shadow-sm transition-all"
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-100 hover:text-gray-900 active:scale-95 shadow-sm transition-all cursor-pointer touch-manipulation"
                 aria-label="Ver productos anteriores"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -305,7 +305,7 @@ export const ProductDetail = () => {
               <button
                 type="button"
                 onClick={() => scrollCarousel('right')}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-100 hover:text-gray-900 active:scale-95 shadow-sm transition-all"
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-100 hover:text-gray-900 active:scale-95 shadow-sm transition-all cursor-pointer touch-manipulation"
                 aria-label="Ver productos siguientes"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -318,17 +318,17 @@ export const ProductDetail = () => {
           {/* Carrusel Desplazable Horizontal con Botones 'Ver más' */}
           <div
             ref={carouselRef}
-            className="flex gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory"
+            className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory touch-pan-x"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {relatedProducts.map((relProduct) => (
               <article
                 key={relProduct.id}
-                className="min-w-[280px] sm:min-w-[310px] max-w-[310px] snap-start bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col flex-shrink-0"
+                className="w-[260px] sm:w-[280px] shrink-0 snap-start bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
               >
                 <Link
                   to={`/producto/${relProduct.id}`}
-                  className="block relative aspect-square overflow-hidden bg-gray-100 group/img"
+                  className="block relative aspect-square overflow-hidden bg-gray-100 group/img touch-manipulation"
                   aria-label={`Ver detalles de ${relProduct.name}`}
                 >
                   <img
@@ -343,7 +343,7 @@ export const ProductDetail = () => {
                 </Link>
                 <div className="p-4 flex-1 flex flex-col justify-between">
                   <div>
-                    <Link to={`/producto/${relProduct.id}`} className="block group/title">
+                    <Link to={`/producto/${relProduct.id}`} className="block group/title touch-manipulation">
                       <h3 className="text-base font-bold text-gray-900 group-hover/title:text-emerald-700 transition-colors truncate">
                         {relProduct.name}
                       </h3>
@@ -353,7 +353,7 @@ export const ProductDetail = () => {
                   <div className="mt-4 pt-3 border-t border-gray-100">
                     <Link
                       to={`/producto/${relProduct.id}`}
-                      className="w-full min-h-[40px] px-3 py-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gray-900 hover:bg-gray-800 active:scale-95 text-white font-medium text-xs shadow-sm hover:shadow transition-all"
+                      className="w-full min-h-[44px] px-3 py-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gray-900 hover:bg-gray-800 active:scale-95 text-white font-medium text-xs shadow-sm hover:shadow transition-all touch-manipulation cursor-pointer"
                     >
                       <span>Ver más</span>
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

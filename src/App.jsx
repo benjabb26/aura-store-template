@@ -19,16 +19,17 @@ const HomePage = () => (
 
 /**
  * Componente principal ensamblador con arquitectura híbrida (React Router DOM + Scroll por Anclas).
+ * Protegido contra desbordamiento horizontal en pantallas móviles compactas.
  */
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50 flex flex-col antialiased">
+      <div className="min-h-screen bg-gray-50 flex flex-col antialiased w-full overflow-x-hidden">
         {/* Navbar persistente en todas las rutas */}
         <Navbar />
 
         {/* Contenido enrutado dinámicamente */}
-        <main className="flex-1">
+        <main className="flex-1 w-full overflow-x-hidden">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/productos" element={<ProductGrid />} />

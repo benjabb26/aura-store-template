@@ -8,7 +8,7 @@ import { generateWhatsAppLink } from '../../utils/whatsapp.js';
  */
 const WhatsAppIcon = () => (
   <svg
-    className="w-5 h-5 shrink-0"
+    className="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
     fill="currentColor"
     viewBox="0 0 24 24"
     aria-hidden="true"
@@ -19,19 +19,7 @@ const WhatsAppIcon = () => (
 );
 
 /**
- * Componente Navbar con arquitectura híbrida y Hover Bridge en el dropdown de Productos.
- * 
- * Principios y Características de UX:
- * - Solución Hover Bridge: Envoltura posicional en `top-full left-0 pt-2.5` que actúa como puente invisible,
- *   garantizando que el estado `group-hover` se mantenga activo mientras el cursor se desplaza hacia el menú.
- * - Rutas SPA directas para '/', '/#nosotros' y '/productos'.
- * - Escucha de Hash Dinámico: Scroll suave a anclas de la página de inicio.
- * - Dropdown Móvil con cierre automático al navegar.
- *
- * @param {Object} props
- * @param {string} [props.businessName] - Nombre del negocio.
- * @param {string} [props.whatsappLink] - URL de WhatsApp directa.
- * @returns {JSX.Element}
+ * Componente Navbar responsive optimizado para smartphones (320px-390px) y pantallas retina.
  */
 export const Navbar = ({
   businessName,
@@ -86,26 +74,25 @@ export const Navbar = ({
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/75 backdrop-blur-xl border-b border-gray-200/40 shadow-sm supports-[backdrop-filter]:bg-white/60 transition-all duration-300">
+    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm supports-[backdrop-filter]:bg-white/65 transition-all duration-300">
       <nav
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
+        className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2"
         aria-label="Navegación principal"
       >
-        {/* Izquierda: Identidad de Marca / Logo */}
-        <div className="flex-shrink-0">
+        {/* Izquierda: Identidad de Marca / Logo (Truncado seguro en 320px) */}
+        <div className="flex-shrink-0 min-w-0">
           <Link
             to="/"
             onClick={handleLinkClick}
-            className="flex items-center gap-2 group text-gray-900 font-bold text-lg sm:text-xl tracking-tight hover:text-gray-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 rounded-lg py-1 px-1 -ml-1"
+            className="flex items-center gap-1.5 group text-gray-900 font-bold text-base sm:text-xl tracking-tight hover:text-gray-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 rounded-lg py-1 px-1 -ml-1"
             aria-label={`${brandName} - Inicio`}
           >
-            <span className="truncate">{brandName}</span>
+            <span className="truncate max-w-[130px] sm:max-w-none">{brandName}</span>
           </Link>
         </div>
 
         {/* Centro: Enlaces de Navegación en Escritorio (React Router + Anclas) */}
         <div className="hidden md:flex items-center gap-1 lg:gap-2">
-          {/* Enlace Inicio */}
           <Link
             to="/"
             className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors px-3.5 py-1.5 rounded-full hover:bg-gray-100/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
@@ -113,7 +100,6 @@ export const Navbar = ({
             Inicio
           </Link>
 
-          {/* Enlace Nosotros (Scroll por Ancla) */}
           <Link
             to="/#nosotros"
             className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors px-3.5 py-1.5 rounded-full hover:bg-gray-100/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
@@ -140,7 +126,7 @@ export const Navbar = ({
               </svg>
             </Link>
 
-            {/* Contenedor Flotante con Hover Bridge (Puente Invisible para evitar interrupción del cursor) */}
+            {/* Contenedor Flotante con Hover Bridge */}
             <div className="absolute top-full left-0 pt-2.5 hidden group-hover:block z-50 transition-all duration-200">
               <div className="flex flex-col bg-white/95 backdrop-blur-xl border border-gray-100 shadow-xl rounded-2xl p-2 min-w-[210px] animate-fadeIn">
                 <Link
@@ -174,13 +160,13 @@ export const Navbar = ({
           </div>
         </div>
 
-        {/* Derecha: Botón de WhatsApp + Toggle Dropdown Móvil */}
-        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        {/* Derecha: Botón de WhatsApp Compacto + Toggle Dropdown Móvil con touch-manipulation */}
+        <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
           <a
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="min-h-[44px] px-3.5 sm:px-5 py-2.5 inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-medium text-sm sm:text-base shadow-md shadow-emerald-600/20 hover:shadow-lg hover:shadow-emerald-600/30 transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500"
+            className="min-h-[40px] sm:min-h-[44px] px-2.5 sm:px-4 py-2 sm:py-2.5 inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-medium text-xs sm:text-sm shadow-sm hover:shadow-md transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 touch-manipulation"
             aria-label={`Contactar a ${brandName} por WhatsApp`}
           >
             <WhatsAppIcon />
@@ -194,7 +180,7 @@ export const Navbar = ({
             aria-expanded={isOpen}
             aria-controls="mobile-nav-dropdown"
             aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
-            className="md:hidden min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full text-gray-700 hover:text-gray-900 hover:bg-gray-100/70 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+            className="md:hidden min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full text-gray-700 hover:text-gray-900 hover:bg-gray-100/70 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 touch-manipulation"
           >
             {isOpen ? (
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -209,20 +195,20 @@ export const Navbar = ({
         </div>
       </nav>
 
-      {/* Menú Desplegable Móvil (React Router + Anclas) */}
+      {/* Menú Desplegable Móvil con scroll vertical seguro en pantallas pequeñas */}
       <div
         id="mobile-nav-dropdown"
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-gray-200/30 bg-white/95 backdrop-blur-xl shadow-xl supports-[backdrop-filter]:bg-white/85 ${
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-gray-200/40 bg-white/95 backdrop-blur-2xl shadow-xl supports-[backdrop-filter]:bg-white/90 ${
           isOpen
-            ? 'max-h-96 opacity-100 py-3 px-4 sm:px-6'
+            ? 'max-h-[85vh] opacity-100 py-3 px-4 sm:px-6 overflow-y-auto'
             : 'max-h-0 opacity-0 py-0 px-4 sm:px-6 pointer-events-none'
         }`}
       >
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 pb-4">
           <Link
             to="/"
             onClick={handleLinkClick}
-            className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-medium text-gray-800 hover:text-gray-950 hover:bg-gray-100/70 active:bg-gray-200/50 transition-colors"
+            className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-medium text-gray-800 hover:text-gray-950 hover:bg-gray-100/70 active:bg-gray-200/50 transition-colors touch-manipulation"
           >
             <span>Inicio</span>
             <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -233,7 +219,7 @@ export const Navbar = ({
           <Link
             to="/#nosotros"
             onClick={handleLinkClick}
-            className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-medium text-gray-800 hover:text-gray-950 hover:bg-gray-100/70 active:bg-gray-200/50 transition-colors"
+            className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-medium text-gray-800 hover:text-gray-950 hover:bg-gray-100/70 active:bg-gray-200/50 transition-colors touch-manipulation"
           >
             <span>Nosotros</span>
             <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -244,7 +230,7 @@ export const Navbar = ({
           <Link
             to="/productos"
             onClick={handleLinkClick}
-            className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-medium text-gray-800 hover:text-gray-950 hover:bg-gray-100/70 active:bg-gray-200/50 transition-colors"
+            className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-medium text-gray-800 hover:text-gray-950 hover:bg-gray-100/70 active:bg-gray-200/50 transition-colors touch-manipulation"
           >
             <span>Productos</span>
             <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

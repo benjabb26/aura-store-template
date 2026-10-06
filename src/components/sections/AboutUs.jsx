@@ -56,17 +56,17 @@ export const AboutUs = ({ businessName }) => {
   return (
     <section
       id="nosotros"
-      className="relative py-20 lg:py-28 bg-gradient-to-b from-white via-emerald-50/20 to-white overflow-hidden"
+      className="relative py-12 sm:py-20 lg:py-28 bg-gradient-to-b from-white via-emerald-50/20 to-white overflow-hidden"
       aria-label="Sobre nosotros y valores de la marca"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera de Sección Centrada para Móvil y Desktop */}
-        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/60 text-emerald-800 text-xs sm:text-sm font-semibold tracking-wide uppercase">
             Nuestra Identidad
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight">
+          <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight">
             Más que zapatillas, es tu estilo de vida con{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700">
               {brandName}
@@ -78,7 +78,7 @@ export const AboutUs = ({ businessName }) => {
         </div>
 
         {/* Cuadrícula Principal: 2 Columnas Balanceadas en Desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           
           {/* Columna 1: Fotografía Inspiradora con Tarjetas Flotantes Glassmorphism */}
           <div className="relative group mx-auto w-full max-w-lg lg:max-w-none order-2 lg:order-1">
@@ -90,7 +90,7 @@ export const AboutUs = ({ businessName }) => {
             ></div>
 
             {/* Contenedor de Fotografía */}
-            <div className="relative overflow-hidden rounded-3xl shadow-2xl bg-white border border-gray-100">
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl bg-white border border-gray-100">
               <img
                 src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&q=80&w=1000"
                 alt={`Experiencia y estilo urbano de calzado ${brandName}`}
@@ -99,28 +99,28 @@ export const AboutUs = ({ businessName }) => {
               />
 
               {/* Tarjeta Flotante Glassmorphism 1: Confort Comprobado */}
-              <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md border border-white/70 shadow-xl rounded-2xl p-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100/80 flex items-center justify-center text-emerald-700 shrink-0">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <div className="absolute top-3 left-3 sm:top-6 sm:left-6 bg-white/90 backdrop-blur-md border border-white/70 shadow-xl rounded-xl sm:rounded-2xl p-2.5 sm:p-4 flex items-center gap-2.5 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-emerald-100/80 flex items-center justify-center text-emerald-700 shrink-0">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-gray-900 leading-tight">100% Confort</p>
-                  <p className="text-[11px] text-gray-500">Diseño ergonómico</p>
+                  <p className="text-[11px] sm:text-xs font-bold text-gray-900 leading-tight">100% Confort</p>
+                  <p className="text-[10px] sm:text-[11px] text-gray-500">Diseño ergonómico</p>
                 </div>
               </div>
 
               {/* Tarjeta Flotante Glassmorphism 2: Atención Humana */}
-              <div className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md border border-white/70 shadow-xl rounded-2xl p-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shrink-0 shadow-sm shadow-emerald-600/30">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <div className="absolute bottom-3 right-3 sm:bottom-6 sm:right-6 bg-white/90 backdrop-blur-md border border-white/70 shadow-xl rounded-xl sm:rounded-2xl p-2.5 sm:p-4 flex items-center gap-2.5 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-emerald-600 flex items-center justify-center text-white shrink-0 shadow-sm shadow-emerald-600/30">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-gray-900 leading-tight">Atención Humana</p>
-                  <p className="text-[11px] text-emerald-600 font-semibold">Respuesta inmediata</p>
+                  <p className="text-[11px] sm:text-xs font-bold text-gray-900 leading-tight">Atención Humana</p>
+                  <p className="text-[10px] sm:text-[11px] text-emerald-600 font-semibold">Respuesta inmediata</p>
                 </div>
               </div>
             </div>
@@ -134,10 +134,10 @@ export const AboutUs = ({ businessName }) => {
               {valueProps.map((item) => (
                 <div
                   key={item.id}
-                  className="group/card bg-white/85 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out"
+                  className="group/card bg-white/85 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100/80 flex items-center justify-center shrink-0 group-hover/card:bg-emerald-600 group-hover/card:text-white transition-colors duration-300">
+                  <div className="flex items-start gap-3.5 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-50 border border-emerald-100/80 flex items-center justify-center shrink-0 group-hover/card:bg-emerald-600 group-hover/card:text-white transition-colors duration-300">
                       <span className="group-hover/card:[&>svg]:text-white transition-colors">
                         {item.icon}
                       </span>
@@ -156,7 +156,7 @@ export const AboutUs = ({ businessName }) => {
             </div>
 
             {/* Franja de Métricas / Social Proof */}
-            <div className="pt-6 border-t border-gray-200/70 grid grid-cols-3 gap-4 text-center sm:text-left">
+            <div className="pt-6 border-t border-gray-200/70 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-center sm:text-left">
               <div className="bg-white/60 backdrop-blur-sm rounded-xl p-3 border border-gray-100/60">
                 <p className="text-2xl sm:text-3xl font-extrabold text-gray-900">+5,000</p>
                 <p className="text-xs text-gray-500 font-medium mt-0.5">Zapatillas entregadas</p>

@@ -29,11 +29,18 @@ export const ProductGrid = () => {
   const [selectedSize, setSelectedSize] = useState('Todas');
   const [maxPrice, setMaxPrice] = useState(600);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   const itemsPerPage = 30;
 
   const categories = ['Todas', 'Running', 'Casuales', 'Edición Limitada', 'Urbanas'];
   const sizes = ['38', '39', '40', '41', '42', '43'];
+
+  // Contabilizar filtros activos
+  const activeFiltersCount =
+    (selectedCategory !== 'Todas' ? 1 : 0) +
+    (selectedSize !== 'Todas' ? 1 : 0) +
+    (maxPrice < 600 ? 1 : 0);
 
   // Filtrado de productos antes de la paginación
   const filteredProducts = productsData.filter((product) => {
@@ -106,33 +113,65 @@ export const ProductGrid = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera del Catálogo */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-gray-200">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-10 pb-4 sm:pb-6 border-b border-gray-200 gap-4">
           <div>
             <span className="text-emerald-600 text-xs sm:text-sm font-bold tracking-wider uppercase">
               Catálogo Oficial
             </span>
-            <h1 className="mt-1 text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+            <h1 className="mt-1 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">
               Colección de Calzado Urbano
             </h1>
           </div>
-          <p className="mt-2 md:mt-0 text-sm text-gray-500 font-medium">
+          <p className="text-xs sm:text-sm text-gray-500 font-medium">
             {filteredProducts.length > 0
               ? `Mostrando ${indexOfFirstProduct + 1} - ${Math.min(indexOfLastProduct, filteredProducts.length)} de ${filteredProducts.length} modelos disponibles`
               : 'No se encontraron modelos con los filtros seleccionados'}
           </p>
         </div>
 
+        {/* Botón Móvil para Desplegar Filtros (lg:hidden) */}
+        <div className="lg:hidden mb-6">
+          <button
+            type="button"
+            onClick={() => setShowMobileFilters(!showMobileFilters)}
+            className="w-full min-h-[48px] px-4 py-3 bg-white border border-gray-200 shadow-sm rounded-xl flex items-center justify-between text-gray-900 font-semibold text-sm active:bg-gray-50 touch-manipulation transition-all cursor-pointer"
+            aria-expanded={showMobileFilters}
+            aria-controls="catalog-filters-sidebar"
+          >
+            <span className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+              </svg>
+              <span>{showMobileFilters ? 'Ocultar Filtros' : 'Filtrar Catálogo'}</span>
+              {activeFiltersCount > 0 && (
+                <span className="ml-1.5 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+                  {activeFiltersCount}
+                </span>
+              )}
+            </span>
+            <span className="text-xs text-gray-500 flex items-center gap-1 font-medium">
+              <span>{showMobileFilters ? 'Cerrar' : 'Configurar'}</span>
+              <svg className={`w-4 h-4 transition-transform duration-200 ${showMobileFilters ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </button>
+        </div>
+
         {/* Layout Asimétrico: Sidebar (1 Columna) + Catálogo (3 Columnas) */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-10 items-start">
           
           {/* Columna Izquierda: Sidebar de Filtros UI */}
-          <aside className="lg:col-span-1 bg-white rounded-2xl p-6 border border-gray-100 shadow-sm sticky top-24 space-y-7">
+          <aside
+            id="catalog-filters-sidebar"
+            className={`${showMobileFilters ? 'block' : 'hidden'} lg:block lg:col-span-1 bg-white rounded-2xl p-6 border border-gray-100 shadow-sm sticky top-24 space-y-7`}
+          >
             <div className="flex items-center justify-between pb-3 border-b border-gray-100">
               <h2 className="text-base font-bold text-gray-900">Filtros</h2>
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="text-xs text-emerald-600 hover:text-emerald-700 font-semibold focus-visible:outline-none focus-visible:underline cursor-pointer"
+                className="text-xs text-emerald-600 hover:text-emerald-700 font-semibold focus-visible:outline-none focus-visible:underline cursor-pointer touch-manipulation"
               >
                 Limpiar
               </button>
@@ -148,7 +187,7 @@ export const ProductGrid = () => {
                   <label
                     key={cat}
                     onClick={() => handleCategoryChange(cat)}
-                    className="flex items-center gap-3 text-sm text-gray-700 hover:text-gray-900 cursor-pointer select-none group"
+                    className="flex items-center gap-3 text-sm text-gray-700 hover:text-gray-900 cursor-pointer select-none group touch-manipulation"
                   >
                     <input
                       type="radio"
@@ -181,10 +220,10 @@ export const ProductGrid = () => {
                     key={size}
                     type="button"
                     onClick={() => handleSizeChange(size)}
-                    className={`min-h-[40px] rounded-xl text-xs font-semibold border transition-all ${
+                    className={`min-h-[44px] rounded-xl text-xs font-semibold border transition-all touch-manipulation cursor-pointer ${
                       selectedSize === size
                         ? 'bg-gray-900 text-white border-gray-900 shadow-sm'
-                        : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                        : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300 hover:bg-gray-50 active:bg-gray-100'
                     }`}
                   >
                     EU {size}
@@ -210,7 +249,7 @@ export const ProductGrid = () => {
                 step="10"
                 value={maxPrice}
                 onChange={(e) => handlePriceChange(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-600 touch-manipulation"
               />
               <div className="flex justify-between text-[11px] text-gray-400">
                 <span>S/ 200</span>
@@ -232,7 +271,7 @@ export const ProductGrid = () => {
           {/* Columna Derecha: Catálogo de Zapatillas con Botón 'Ver más' */}
           <main className="lg:col-span-3 flex flex-col">
             {currentProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                 {currentProducts.map((product, index) => {
                   const globalIndex = indexOfFirstProduct + index;
 
@@ -244,7 +283,7 @@ export const ProductGrid = () => {
                       {/* Enlace al Detalle del Producto (PDP) en la Imagen */}
                       <Link
                         to={`/producto/${product.id}`}
-                        className="block overflow-hidden relative aspect-square bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                        className="block overflow-hidden relative aspect-square bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 touch-manipulation"
                         aria-label={`Ver detalles de ${product.name}`}
                       >
                         <img
@@ -269,14 +308,14 @@ export const ProductGrid = () => {
                       </Link>
 
                       {/* Información y Acción Ver Más */}
-                      <div className="p-5 flex-1 flex flex-col justify-between">
+                      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
                         <div>
                           {/* Enlace al Detalle del Producto (PDP) en el Título */}
                           <Link
                             to={`/producto/${product.id}`}
-                            className="block group/title focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded"
+                            className="block group/title focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded touch-manipulation"
                           >
-                            <h3 className="text-lg font-bold text-gray-900 group-hover/title:text-emerald-700 transition-colors leading-snug">
+                            <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover/title:text-emerald-700 transition-colors leading-snug line-clamp-1">
                               {product.name}
                             </h3>
                           </Link>
@@ -286,10 +325,10 @@ export const ProductGrid = () => {
                         </div>
 
                         {/* Botón Ver Más */}
-                        <div className="mt-5 pt-4 border-t border-gray-100">
+                        <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-gray-100">
                           <Link
                             to={`/producto/${product.id}`}
-                            className="w-full min-h-[44px] px-4 py-2.5 inline-flex items-center justify-center gap-2 rounded-xl bg-gray-900 hover:bg-gray-800 active:scale-95 text-white font-medium text-sm shadow-sm hover:shadow transition-all duration-150 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-900"
+                            className="w-full min-h-[44px] px-4 py-2.5 inline-flex items-center justify-center gap-2 rounded-xl bg-gray-900 hover:bg-gray-800 active:scale-95 text-white font-medium text-sm shadow-sm hover:shadow transition-all duration-150 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-900 touch-manipulation cursor-pointer"
                             aria-label={`Ver más detalles de ${product.name}`}
                           >
                             <span>Ver más</span>
@@ -305,7 +344,7 @@ export const ProductGrid = () => {
               </div>
             ) : (
               /* Estado Vacío cuando no coinciden filtros */
-              <div className="bg-white rounded-2xl p-12 text-center border border-gray-100 shadow-sm">
+              <div className="bg-white rounded-2xl p-8 sm:p-12 text-center border border-gray-100 shadow-sm">
                 <span className="text-4xl">👟</span>
                 <h3 className="mt-3 text-lg font-bold text-gray-900">
                   No se encontraron zapatillas
@@ -316,7 +355,7 @@ export const ProductGrid = () => {
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="mt-5 px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 active:scale-95 transition-all"
+                  className="mt-5 min-h-[44px] px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 active:scale-95 transition-all touch-manipulation cursor-pointer"
                 >
                   Restablecer Filtros
                 </button>
@@ -326,7 +365,7 @@ export const ProductGrid = () => {
             {/* Controles de Paginación UI Premium (Estilo iOS Píldora) */}
             {totalPages > 1 && (
               <nav
-                className="mt-12 pt-8 border-t border-gray-200/80 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+                className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200/80 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
                 aria-label="Paginación del catálogo"
               >
                 {/* Botón Anterior */}
@@ -334,10 +373,10 @@ export const ProductGrid = () => {
                   type="button"
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`min-h-[42px] px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-1.5 transition-all ${
+                  className={`min-h-[44px] px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-1.5 transition-all touch-manipulation ${
                     currentPage === 1
                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-50'
-                      : 'bg-white hover:bg-gray-100 text-gray-700 shadow-sm border border-gray-200 active:scale-95'
+                      : 'bg-white hover:bg-gray-100 text-gray-700 shadow-sm border border-gray-200 active:scale-95 cursor-pointer'
                   }`}
                   aria-label="Ir a página anterior"
                 >
@@ -348,16 +387,16 @@ export const ProductGrid = () => {
                 </button>
 
                 {/* Botones Numéricos de Página */}
-                <div className="flex items-center gap-1.5">
+                <div className="flex flex-wrap items-center justify-center gap-1.5">
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
                     <button
                       key={pageNumber}
                       type="button"
                       onClick={() => handlePageChange(pageNumber)}
-                      className={`min-h-[42px] min-w-[42px] px-3.5 rounded-xl text-sm font-bold transition-all ${
+                      className={`min-h-[44px] min-w-[44px] px-3.5 rounded-xl text-sm font-bold transition-all touch-manipulation cursor-pointer ${
                         currentPage === pageNumber
                           ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25 scale-105'
-                          : 'bg-white hover:bg-gray-100 text-gray-700 border border-gray-200 hover:border-gray-300'
+                          : 'bg-white hover:bg-gray-100 text-gray-700 border border-gray-200 hover:border-gray-300 active:bg-gray-50'
                       }`}
                       aria-current={currentPage === pageNumber ? 'page' : undefined}
                       aria-label={`Página ${pageNumber}`}
@@ -372,10 +411,10 @@ export const ProductGrid = () => {
                   type="button"
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className={`min-h-[42px] px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-1.5 transition-all ${
+                  className={`min-h-[44px] px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-1.5 transition-all touch-manipulation ${
                     currentPage === totalPages
                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-50'
-                      : 'bg-white hover:bg-gray-100 text-gray-700 shadow-sm border border-gray-200 active:scale-95'
+                      : 'bg-white hover:bg-gray-100 text-gray-700 shadow-sm border border-gray-200 active:scale-95 cursor-pointer'
                   }`}
                   aria-label="Ir a página siguiente"
                 >

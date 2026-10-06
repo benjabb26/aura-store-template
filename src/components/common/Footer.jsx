@@ -54,7 +54,7 @@ export const Footer = ({
 
   return (
     <footer className="bg-gray-950 text-gray-300 border-t border-gray-800/80 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-14 pb-12 sm:pb-16">
         
         {/* Estructura Principal: Grid de 4 Columnas */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
@@ -86,7 +86,7 @@ export const Footer = ({
                 <li key={link.to}>
                   <Link
                     to={link.to}
-                    className="inline-flex items-center gap-1.5 text-gray-400 hover:text-white hover:translate-x-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded"
+                    className="inline-flex items-center gap-1.5 py-1 text-gray-400 hover:text-white hover:translate-x-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded touch-manipulation"
                   >
                     <span className="text-emerald-500 text-xs">›</span>
                     <span>{link.label}</span>
@@ -106,7 +106,7 @@ export const Footer = ({
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gray-900 border border-gray-800 text-emerald-400 hover:text-emerald-300 hover:bg-gray-850 hover:border-emerald-500/40 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                className="inline-flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] rounded-xl bg-gray-900 border border-gray-800 text-emerald-400 hover:text-emerald-300 hover:bg-gray-850 hover:border-emerald-500/40 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 touch-manipulation"
                 aria-label={`Escribir a WhatsApp de ${brandName}`}
               >
                 <WhatsAppIcon />
