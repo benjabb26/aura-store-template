@@ -1,0 +1,542 @@
+[
+  {
+    "id": "prod-001",
+    "name": "Aura Street One",
+    "description": "Zapatillas urbanas de corte clásico con amortiguación premium para el día a día.",
+    "price": "S/ 350.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Street One (S/ 350.00)."
+  },
+  {
+    "id": "prod-002",
+    "name": "Aura Runner Air",
+    "description": "Diseño deportivo ultraligero con suela reactiva y tejido transpirable.",
+    "price": "S/ 380.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Runner Air (S/ 380.00)."
+  },
+  {
+    "id": "prod-003",
+    "name": "Aura Retro High",
+    "description": "Estilo retro con caña alta, acabados en cuero sintético y máxima tracción.",
+    "price": "S/ 420.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Retro High (S/ 420.00)."
+  },
+  {
+    "id": "prod-004",
+    "name": "Aura Minimalist Low",
+    "description": "Silueta limpia y versátil confeccionada para combinar con cualquier atuendo.",
+    "price": "S/ 290.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Minimalist Low (S/ 290.00)."
+  },
+  {
+    "id": "prod-005",
+    "name": "Aura Turbo Sprint",
+    "description": "Espuma de retorno energético para corredores exigentes en distancias medias.",
+    "price": "S/ 390.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Turbo Sprint (S/ 390.00)."
+  },
+  {
+    "id": "prod-006",
+    "name": "Aura Tokyo Drift",
+    "description": "Colaboración exclusiva con patrones futuristas y detalles reflectivos nocturnos.",
+    "price": "S/ 480.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Tokyo Drift (S/ 480.00)."
+  },
+  {
+    "id": "prod-007",
+    "name": "Aura City Glide",
+    "description": "Diseñadas para el asfalto con suela antideslizante y confort continuo.",
+    "price": "S/ 320.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura City Glide (S/ 320.00)."
+  },
+  {
+    "id": "prod-008",
+    "name": "Aura Canvas Classic",
+    "description": "Lona reforzada con costuras dobles y suela vulcanizada de máxima durabilidad.",
+    "price": "S/ 260.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Canvas Classic (S/ 260.00)."
+  },
+  {
+    "id": "prod-009",
+    "name": "Aura Aero Strike",
+    "description": "Placa de propulsión liviana para entrenamientos de velocidad y ritmos altos.",
+    "price": "S/ 410.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Aero Strike (S/ 410.00)."
+  },
+  {
+    "id": "prod-010",
+    "name": "Aura Neon Phantom",
+    "description": "Tiraje numerado con detalles fluorescentes y cápsula de aire visible.",
+    "price": "S/ 499.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Neon Phantom (S/ 499.00)."
+  },
+  {
+    "id": "prod-011",
+    "name": "Aura Downtown Flex",
+    "description": "Flexibilidad total y empeine acolchado para jornadas urbanas intensas.",
+    "price": "S/ 340.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Downtown Flex (S/ 340.00)."
+  },
+  {
+    "id": "prod-012",
+    "name": "Aura Pure White",
+    "description": "Monocromático en blanco impoluto con plantilla acolchada de espuma viscoelástica.",
+    "price": "S/ 280.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Pure White (S/ 280.00)."
+  },
+  {
+    "id": "prod-013",
+    "name": "Aura Marathon Elite",
+    "description": "Amortiguación de densidad dual desarrollada para soportar largas distancias.",
+    "price": "S/ 450.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Marathon Elite (S/ 450.00)."
+  },
+  {
+    "id": "prod-014",
+    "name": "Aura Cyber Chrome",
+    "description": "Inserciones cromadas y materiales tecnológicos de edición de aniversario.",
+    "price": "S/ 520.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Cyber Chrome (S/ 520.00)."
+  },
+  {
+    "id": "prod-015",
+    "name": "Aura Metro Stride",
+    "description": "Inspiradas en la arquitectura moderna con soporte lateral reforzado.",
+    "price": "S/ 330.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Metro Stride (S/ 330.00)."
+  },
+  {
+    "id": "prod-016",
+    "name": "Aura Daily Comfort",
+    "description": "Ligereza suprema que hace que te olvides de que llevas calzado puesto.",
+    "price": "S/ 270.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Daily Comfort (S/ 270.00)."
+  },
+  {
+    "id": "prod-017",
+    "name": "Aura Velocity Knit",
+    "description": "Malla tejida en una sola pieza que se adapta a cada movimiento del pie.",
+    "price": "S/ 370.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Velocity Knit (S/ 370.00)."
+  },
+  {
+    "id": "prod-018",
+    "name": "Aura Gold Horizon",
+    "description": "Detalles dorados metalizados y caja conmemorativa para coleccionistas.",
+    "price": "S/ 510.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Gold Horizon (S/ 510.00)."
+  },
+  {
+    "id": "prod-019",
+    "name": "Aura Asphalt Grip",
+    "description": "Tracción multidireccional ideal para caminatas prolongadas sobre pavimento.",
+    "price": "S/ 360.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Asphalt Grip (S/ 360.00)."
+  },
+  {
+    "id": "prod-020",
+    "name": "Aura Relax Step",
+    "description": "Diseño ergonómico slip-on con ajuste elástico de calce ultra rápido.",
+    "price": "S/ 250.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Relax Step (S/ 250.00)."
+  },
+  {
+    "id": "prod-021",
+    "name": "Aura Cloud Pulse",
+    "description": "Cápsulas de aire independientes que absorben el impacto a cada zancada.",
+    "price": "S/ 400.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Cloud Pulse (S/ 400.00)."
+  },
+  {
+    "id": "prod-022",
+    "name": "Aura Eclipse Obsidian",
+    "description": "Acabado negro mate profundo con textura satinada y piezas de fibra de carbono.",
+    "price": "S/ 490.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Eclipse Obsidian (S/ 490.00)."
+  },
+  {
+    "id": "prod-023",
+    "name": "Aura Underground Wave",
+    "description": "Líneas onduladas inspiradas en el arte urbano contemporáneo.",
+    "price": "S/ 350.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Underground Wave (S/ 350.00)."
+  },
+  {
+    "id": "prod-024",
+    "name": "Aura Coast Cruiser",
+    "description": "Materiales frescos y transpirables para climas cálidos y fines de semana.",
+    "price": "S/ 290.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Coast Cruiser (S/ 290.00)."
+  },
+  {
+    "id": "prod-025",
+    "name": "Aura Apex Runner",
+    "description": "Máxima estabilidad y soporte de talón para carreras exigentes y tempo runs.",
+    "price": "S/ 430.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Apex Runner (S/ 430.00)."
+  },
+  {
+    "id": "prod-026",
+    "name": "Aura Velvet Noir",
+    "description": "Microfibra aterciopelada y ojales metálicos oscurecidos de edición boutique.",
+    "price": "S/ 470.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Velvet Noir (S/ 470.00)."
+  },
+  {
+    "id": "prod-027",
+    "name": "Aura Block Walker",
+    "description": "Suela gruesa geométrica con estilo chunky que marca tendencia en la calle.",
+    "price": "S/ 310.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Block Walker (S/ 310.00)."
+  },
+  {
+    "id": "prod-028",
+    "name": "Aura Sand Breeze",
+    "description": "Tonos tierra neutros en ante sintético suave para un look desenfadado.",
+    "price": "S/ 280.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Sand Breeze (S/ 280.00)."
+  },
+  {
+    "id": "prod-029",
+    "name": "Aura Nitro Surge",
+    "description": "Entresuela infusionada con nitrógeno que brinda reactividad incomparable.",
+    "price": "S/ 440.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Nitro Surge (S/ 440.00)."
+  },
+  {
+    "id": "prod-030",
+    "name": "Aura Solar Flare",
+    "description": "Gradiente cálido de edición especial con tecnología de termosellado sin costuras.",
+    "price": "S/ 530.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Solar Flare (S/ 530.00)."
+  },
+  {
+    "id": "prod-031",
+    "name": "Aura Shibuya Drift",
+    "description": "Estética inspirada en el streetwear japonés con detalles tipográficos bordados.",
+    "price": "S/ 380.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Shibuya Drift (S/ 380.00)."
+  },
+  {
+    "id": "prod-032",
+    "name": "Aura Cotton Ease",
+    "description": "Zapatilla ligera de algodón orgánico pensada para el confort diario.",
+    "price": "S/ 260.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Cotton Ease (S/ 260.00)."
+  },
+  {
+    "id": "prod-033",
+    "name": "Aura Ultra Sprint X",
+    "description": "Diseñada para atletas que buscan batir sus récords en pistas de tartán y asfalto.",
+    "price": "S/ 460.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Ultra Sprint X (S/ 460.00)."
+  },
+  {
+    "id": "prod-034",
+    "name": "Aura Midnight Glow",
+    "description": "Detalles luminiscentes que brillan en la oscuridad bajo iluminación UV.",
+    "price": "S/ 495.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Midnight Glow (S/ 495.00)."
+  },
+  {
+    "id": "prod-035",
+    "name": "Aura District High",
+    "description": "Tobillera acolchada y perfil alto para mayor protección y estilo callejero.",
+    "price": "S/ 370.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura District High (S/ 370.00)."
+  },
+  {
+    "id": "prod-036",
+    "name": "Aura Cloud Moccasin",
+    "description": "Fusión híbrida entre mocasín casual y sneaker deportiva súper cómoda.",
+    "price": "S/ 300.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Cloud Moccasin (S/ 300.00)."
+  },
+  {
+    "id": "prod-037",
+    "name": "Aura Aero Track",
+    "description": "Respirabilidad activa con canales de ventilación directa en la planta.",
+    "price": "S/ 390.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Aero Track (S/ 390.00)."
+  },
+  {
+    "id": "prod-038",
+    "name": "Aura Royal Crown",
+    "description": "Emblemas grabados a láser y detalles en tonos púrpura real de tiraje corto.",
+    "price": "S/ 540.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Royal Crown (S/ 540.00)."
+  },
+  {
+    "id": "prod-039",
+    "name": "Aura Alleyway Sneaker",
+    "description": "Refuerzos de caucho vulcanizado en la puntera para resistir el uso rudo.",
+    "price": "S/ 330.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Alleyway Sneaker (S/ 330.00)."
+  },
+  {
+    "id": "prod-040",
+    "name": "Aura Weekend Club",
+    "description": "El básico infaltable para tus salidas de descanso y encuentros informales.",
+    "price": "S/ 285.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Weekend Club (S/ 285.00)."
+  },
+  {
+    "id": "prod-041",
+    "name": "Aura Kinetic Blaze",
+    "description": "Geometría de entresuela curva que impulsa la pisada hacia adelante con menor esfuerzo.",
+    "price": "S/ 420.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Kinetic Blaze (S/ 420.00)."
+  },
+  {
+    "id": "prod-042",
+    "name": "Aura Aurora Borealis",
+    "description": "Acabado iridiscente que cambia de tonalidad según el ángulo de la luz.",
+    "price": "S/ 515.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Aurora Borealis (S/ 515.00)."
+  },
+  {
+    "id": "prod-043",
+    "name": "Aura Street Beast",
+    "description": "Contraste de texturas con suela track gruesa para marcar presencia en la ciudad.",
+    "price": "S/ 360.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Street Beast (S/ 360.00)."
+  },
+  {
+    "id": "prod-044",
+    "name": "Aura Urban Pastel",
+    "description": "Paleta cromática suave en tonos lavanda y menta para looks frescos y modernos.",
+    "price": "S/ 295.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Urban Pastel (S/ 295.00)."
+  },
+  {
+    "id": "prod-045",
+    "name": "Aura Hyper Pace",
+    "description": "Amortiguación reactiva ultra liviana para entrenamientos de intervalos.",
+    "price": "S/ 410.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Hyper Pace (S/ 410.00)."
+  },
+  {
+    "id": "prod-046",
+    "name": "Aura Carbon Stealth",
+    "description": "Placa de carbono insertada y exterior balístico de resistencia extrema.",
+    "price": "S/ 550.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Carbon Stealth (S/ 550.00)."
+  },
+  {
+    "id": "prod-047",
+    "name": "Aura Skyline Vibe",
+    "description": "Inspirada en el skyline de las metrópolis, con paneles reflectantes laterales.",
+    "price": "S/ 340.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Skyline Vibe (S/ 340.00)."
+  },
+  {
+    "id": "prod-048",
+    "name": "Aura Retro Court",
+    "description": "Inspiradas en las canchas de tenis de los 80 con cuero sintético microperforado.",
+    "price": "S/ 310.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Retro Court (S/ 310.00)."
+  },
+  {
+    "id": "prod-049",
+    "name": "Aura Zenith Trail",
+    "description": "Tacos multidireccionales agresivos aptos para asfalto húmedo y senderos mixtos.",
+    "price": "S/ 440.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Zenith Trail (S/ 440.00)."
+  },
+  {
+    "id": "prod-050",
+    "name": "Aura Platinum Wave",
+    "description": "Acabados plateados cepillados con número de serie exclusivo grabado en la lengüeta.",
+    "price": "S/ 560.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Platinum Wave (S/ 560.00)."
+  },
+  {
+    "id": "prod-051",
+    "name": "Aura Rooftop Session",
+    "description": "Estilo relajado con perfil bajo y máxima flexibilidad para tus tardes urbanas.",
+    "price": "S/ 350.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Rooftop Session (S/ 350.00)."
+  },
+  {
+    "id": "prod-052",
+    "name": "Aura Canvas Slip",
+    "description": "Sin cordones, fáciles de poner y quitar, con ajuste suave en el empeine.",
+    "price": "S/ 250.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Canvas Slip (S/ 250.00)."
+  },
+  {
+    "id": "prod-053",
+    "name": "Aura Storm Runner",
+    "description": "Tratamiento exterior hidrófugo que repele salpicaduras en climas lluviosos.",
+    "price": "S/ 425.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Storm Runner (S/ 425.00)."
+  },
+  {
+    "id": "prod-054",
+    "name": "Aura Neon Dynasty",
+    "description": "Combinación vibrante de fucsia y turquesa neón para destacar en cualquier lugar.",
+    "price": "S/ 485.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Neon Dynasty (S/ 485.00)."
+  },
+  {
+    "id": "prod-055",
+    "name": "Aura Boulevard Rider",
+    "description": "Suela plana de alta densidad ideal para skate, BMX o simplemente caminar con flow.",
+    "price": "S/ 375.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Boulevard Rider (S/ 375.00)."
+  },
+  {
+    "id": "prod-056",
+    "name": "Aura Soft Touch",
+    "description": "Textil transpirable de tacto suave con soporte en el arco para evitar el cansancio.",
+    "price": "S/ 275.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Soft Touch (S/ 275.00)."
+  },
+  {
+    "id": "prod-057",
+    "name": "Aura Flash React",
+    "description": "Diseñadas para transiciones rápidas del talón a la punta con reactividad explosiva.",
+    "price": "S/ 435.00",
+    "category": "Running",
+    "image": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Flash React (S/ 435.00)."
+  },
+  {
+    "id": "prod-058",
+    "name": "Aura Infinity Void",
+    "description": "Diseño conceptual en monocromo mate ultra premium con piezas de titanio ligero.",
+    "price": "S/ 580.00",
+    "category": "Edición Limitada",
+    "image": "https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Infinity Void (S/ 580.00)."
+  },
+  {
+    "id": "prod-059",
+    "name": "Aura Concrete Jungle",
+    "description": "Construcción robusta anti-abrasión para conquistar cualquier terreno de la ciudad.",
+    "price": "S/ 365.00",
+    "category": "Urbanas",
+    "image": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Concrete Jungle (S/ 365.00)."
+  },
+  {
+    "id": "prod-060",
+    "name": "Aura Chill Out",
+    "description": "Silueta baja y liviana, ideal para el fin de semana y días de total desconexión.",
+    "price": "S/ 290.00",
+    "category": "Casuales",
+    "image": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&auto=format&fit=crop&q=80",
+    "customMessage": "Hola, estoy interesado en las zapatillas Aura Chill Out (S/ 290.00)."
+  }
+]
