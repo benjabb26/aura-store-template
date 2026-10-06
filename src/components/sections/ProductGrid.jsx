@@ -158,13 +158,13 @@ export const ProductGrid = () => {
           </button>
         </div>
 
-        {/* Layout Asimétrico: Sidebar (1 Columna) + Catálogo (3 Columnas) */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-10 items-start">
+        {/* Layout Asimétrico: Sidebar (1 Columna) + Catálogo (3 Columnas) con Flujo Natural */}
+        <div className="flex flex-col lg:grid lg:grid-cols-4 gap-6 lg:gap-10 items-start">
           
-          {/* Columna Izquierda: Sidebar de Filtros UI */}
+          {/* Columna Izquierda / Acordeón Plegable en Móvil: Sidebar de Filtros UI */}
           <aside
             id="catalog-filters-sidebar"
-            className={`${showMobileFilters ? 'block' : 'hidden'} lg:block lg:col-span-1 bg-white rounded-2xl p-6 border border-gray-100 shadow-sm sticky top-24 space-y-7`}
+            className={`${showMobileFilters ? 'block mb-6' : 'hidden'} lg:block lg:mb-0 lg:col-span-1 w-full relative z-10 lg:sticky lg:top-24 h-auto bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-7`}
           >
             <div className="flex items-center justify-between pb-3 border-b border-gray-100">
               <h2 className="text-base font-bold text-gray-900">Filtros</h2>
@@ -269,16 +269,16 @@ export const ProductGrid = () => {
           </aside>
 
           {/* Columna Derecha: Catálogo de Zapatillas con Botón 'Ver más' */}
-          <main className="lg:col-span-3 flex flex-col">
+          <main className="lg:col-span-3 w-full flex flex-col">
             {currentProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                 {currentProducts.map((product, index) => {
                   const globalIndex = indexOfFirstProduct + index;
 
                   return (
                     <article
                       key={product.id || globalIndex}
-                      className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                      className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
                     >
                       {/* Enlace al Detalle del Producto (PDP) en la Imagen */}
                       <Link
@@ -325,10 +325,10 @@ export const ProductGrid = () => {
                         </div>
 
                         {/* Botón Ver Más */}
-                        <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-gray-100">
+                        <div className="mt-5 pt-4 border-t border-gray-100">
                           <Link
                             to={`/producto/${product.id}`}
-                            className="w-full min-h-[44px] px-4 py-2.5 inline-flex items-center justify-center gap-2 rounded-xl bg-gray-900 hover:bg-gray-800 active:scale-95 text-white font-medium text-sm shadow-sm hover:shadow transition-all duration-150 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-900 touch-manipulation cursor-pointer"
+                            className="w-full min-h-[48px] px-4 py-3 inline-flex items-center justify-center gap-2 rounded-xl bg-gray-900 hover:bg-gray-800 active:scale-95 text-white font-semibold text-sm shadow-sm hover:shadow transition-all duration-150 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-900 touch-manipulation cursor-pointer"
                             aria-label={`Ver más detalles de ${product.name}`}
                           >
                             <span>Ver más</span>
