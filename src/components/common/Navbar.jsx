@@ -107,6 +107,13 @@ export const Navbar = ({
             Nosotros
           </Link>
 
+          <Link
+            to="/#ubicacion"
+            className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors px-3.5 py-1.5 rounded-full hover:bg-gray-100/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+          >
+            Ubicación
+          </Link>
+
           {/* Enlace Productos con Menú Desplegable Flotante y Hover Bridge */}
           <div className="relative group">
             <Link
@@ -222,6 +229,17 @@ export const Navbar = ({
             className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-medium text-gray-800 hover:text-gray-950 hover:bg-gray-100/70 active:bg-gray-200/50 transition-colors touch-manipulation"
           >
             <span>Nosotros</span>
+            <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+
+          <Link
+            to="/#ubicacion"
+            onClick={handleLinkClick}
+            className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-medium text-gray-800 hover:text-gray-950 hover:bg-gray-100/70 active:bg-gray-200/50 transition-colors touch-manipulation"
+          >
+            <span>Ubicación</span>
             <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

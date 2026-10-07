@@ -26,34 +26,44 @@ const parsePrice = (priceStr) => {
  */
 export const ProductGrid = () => {
   const [selectedCategory, setSelectedCategory] = useState('Todas');
-  const [selectedSize, setSelectedSize] = useState('Todas');
-  const [maxPrice, setMaxPrice] = useState(600);
+  const [selectedBrand, setSelectedBrand] = useState('Todas');
+  const [maxPrice, setMaxPrice] = useState(700);
+  const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   const itemsPerPage = 30;
 
-  const categories = ['Todas', 'Running', 'Casuales', 'Edición Limitada', 'Urbanas'];
-  const sizes = ['38', '39', '40', '41', '42', '43'];
+  const categories = ['Todas', 'Running', 'Casual', 'Vestir', 'Urbano', 'Deportivo', 'Edición Limitada'];
+  const brands = ['Todas', 'Nike', 'Adidas', 'Puma', 'New Balance', 'Jordan', 'Asics', 'Converse', 'Vans'];
 
   // Contabilizar filtros activos
   const activeFiltersCount =
     (selectedCategory !== 'Todas' ? 1 : 0) +
-    (selectedSize !== 'Todas' ? 1 : 0) +
-    (maxPrice < 600 ? 1 : 0);
+    (selectedBrand !== 'Todas' ? 1 : 0) +
+    (maxPrice < 700 ? 1 : 0) +
+    (searchTerm.trim() ? 1 : 0);
 
-  // Filtrado de productos antes de la paginación
+  // Filtrado de productos antes de la paginación con lógica combinada
   const filteredProducts = productsData.filter((product) => {
     const matchCategory =
       selectedCategory === 'Todas' ||
-      (product.category && product.category.toLowerCase() === selectedCategory.toLowerCase()) ||
-      product.name.toLowerCase().includes(selectedCategory.toLowerCase()) ||
-      product.description.toLowerCase().includes(selectedCategory.toLowerCase());
+      (product.category && product.category.toLowerCase() === selectedCategory.toLowerCase());
+
+    const matchBrand =
+      selectedBrand === 'Todas' ||
+      (product.brand && product.brand.toLowerCase() === selectedBrand.toLowerCase());
 
     const numericPrice = parsePrice(product.price);
     const matchPrice = numericPrice <= maxPrice;
 
-    return matchCategory && matchPrice;
+    const matchSearch =
+      !searchTerm.trim() ||
+      product.name.toLowerCase().includes(searchTerm.toLowerCase().trim()) ||
+      (product.brand && product.brand.toLowerCase().includes(searchTerm.toLowerCase().trim())) ||
+      (product.category && product.category.toLowerCase().includes(searchTerm.toLowerCase().trim()));
+
+    return matchCategory && matchBrand && matchPrice && matchSearch;
   });
 
   // Cálculo estricto de paginación
@@ -71,13 +81,18 @@ export const ProductGrid = () => {
     setCurrentPage(1);
   };
 
+  const handleBrandChange = (brand) => {
+    setSelectedBrand(brand);
+    setCurrentPage(1);
+  };
+
   const handlePriceChange = (price) => {
     setMaxPrice(price);
     setCurrentPage(1);
   };
 
-  const handleSizeChange = (size) => {
-    setSelectedSize((prev) => (prev === size ? 'Todas' : size));
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
     setCurrentPage(1);
   };
 
@@ -93,8 +108,9 @@ export const ProductGrid = () => {
 
   const handleResetFilters = () => {
     setSelectedCategory('Todas');
-    setSelectedSize('Todas');
-    setMaxPrice(600);
+    setSelectedBrand('Todas');
+    setMaxPrice(700);
+    setSearchTerm('');
     setCurrentPage(1);
   };
 
@@ -122,11 +138,22 @@ export const ProductGrid = () => {
               Colección de Calzado Urbano
             </h1>
           </div>
-          <p className="text-xs sm:text-sm text-gray-500 font-medium">
-            {filteredProducts.length > 0
-              ? `Mostrando ${indexOfFirstProduct + 1} - ${Math.min(indexOfLastProduct, filteredProducts.length)} de ${filteredProducts.length} modelos disponibles`
-              : 'No se encontraron modelos con los filtros seleccionados'}
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <p className="text-xs sm:text-sm text-gray-500 font-medium">
+              {filteredProducts.length > 0
+                ? `Mostrando ${indexOfFirstProduct + 1} - ${Math.min(indexOfLastProduct, filteredProducts.length)} de ${filteredProducts.length} modelos`
+                : 'No se encontraron modelos con los filtros seleccionados'}
+            </p>
+            {activeFiltersCount > 0 && (
+              <button
+                type="button"
+                onClick={handleResetFilters}
+                className="text-xs text-emerald-600 hover:text-emerald-700 font-bold underline cursor-pointer self-start sm:self-auto touch-manipulation"
+              >
+                Limpiar filtros ({activeFiltersCount})
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Botón Móvil para Desplegar Filtros (lg:hidden) */}
@@ -164,88 +191,137 @@ export const ProductGrid = () => {
           {/* Columna Izquierda / Acordeón Plegable en Móvil: Sidebar de Filtros UI */}
           <aside
             id="catalog-filters-sidebar"
-            className={`${showMobileFilters ? 'block mb-6' : 'hidden'} lg:block lg:mb-0 lg:col-span-1 w-full relative z-10 lg:sticky lg:top-24 h-auto bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-7`}
+            className={`${showMobileFilters ? 'block mb-6' : 'hidden'} lg:block lg:mb-0 lg:col-span-1 w-full relative z-10 lg:sticky lg:top-24 h-auto bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-6`}
           >
             <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-              <h2 className="text-base font-bold text-gray-900">Filtros</h2>
+              <h2 className="text-base font-bold text-gray-900 flex items-center gap-2">
+                <span>Filtros</span>
+                {activeFiltersCount > 0 && (
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">
+                    {activeFiltersCount}
+                  </span>
+                )}
+              </h2>
               <button
                 type="button"
                 onClick={handleResetFilters}
                 className="text-xs text-emerald-600 hover:text-emerald-700 font-semibold focus-visible:outline-none focus-visible:underline cursor-pointer touch-manipulation"
               >
-                Limpiar
+                Limpiar todo
               </button>
             </div>
 
-            {/* Filtro 1: Categorías */}
-            <div className="space-y-3">
-              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-                Categorías
-              </h3>
-              <div className="space-y-2">
+            {/* Filtro 1: Buscador por texto */}
+            <div className="space-y-2">
+              <label htmlFor="catalog-search" className="text-xs font-bold text-gray-500 uppercase tracking-wider block">
+                Buscar Modelo
+              </label>
+              <div className="relative">
+                <input
+                  id="catalog-search"
+                  type="text"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  placeholder="Ej. Air Force, Ultraboost..."
+                  className="w-full px-3.5 py-2 pl-9 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all"
+                />
+                <svg className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                {searchTerm && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSearchTerm('');
+                      setCurrentPage(1);
+                    }}
+                    className="absolute right-2.5 top-2.5 text-gray-400 hover:text-gray-600 text-xs p-0.5"
+                    aria-label="Limpiar búsqueda"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Filtro 2: Marcas */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                  Marca
+                </h3>
+                {selectedBrand !== 'Todas' && (
+                  <span className="text-[11px] text-emerald-600 font-semibold">{selectedBrand}</span>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {brands.map((brand) => (
+                  <button
+                    key={brand}
+                    type="button"
+                    onClick={() => handleBrandChange(brand)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all touch-manipulation cursor-pointer ${
+                      selectedBrand === brand
+                        ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
+                        : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-gray-300 hover:bg-gray-100'
+                    }`}
+                  >
+                    {brand}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Filtro 3: Categorías */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                  Categoría
+                </h3>
+                {selectedCategory !== 'Todas' && (
+                  <span className="text-[11px] text-emerald-600 font-semibold">{selectedCategory}</span>
+                )}
+              </div>
+              <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
                 {categories.map((cat) => (
                   <label
                     key={cat}
                     onClick={() => handleCategoryChange(cat)}
-                    className="flex items-center gap-3 text-sm text-gray-700 hover:text-gray-900 cursor-pointer select-none group touch-manipulation"
+                    className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs cursor-pointer select-none transition-colors ${
+                      selectedCategory === cat
+                        ? 'bg-emerald-50 text-emerald-900 font-bold'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
                   >
-                    <input
-                      type="radio"
-                      name="category"
-                      checked={selectedCategory === cat}
-                      onChange={() => handleCategoryChange(cat)}
-                      className="w-4 h-4 text-emerald-600 border-gray-300 focus:ring-emerald-500 accent-emerald-600 cursor-pointer"
-                    />
-                    <span className={`transition-colors ${selectedCategory === cat ? 'font-semibold text-gray-900' : 'group-hover:text-gray-900'}`}>
-                      {cat}
+                    <span className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="category"
+                        checked={selectedCategory === cat}
+                        onChange={() => handleCategoryChange(cat)}
+                        className="w-3.5 h-3.5 text-emerald-600 border-gray-300 focus:ring-emerald-500 accent-emerald-600 cursor-pointer"
+                      />
+                      <span>{cat}</span>
                     </span>
                   </label>
                 ))}
               </div>
             </div>
 
-            {/* Filtro 2: Tallas en Píldoras Interactivas */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-                  Tallas Disponibles
-                </h3>
-                {selectedSize !== 'Todas' && (
-                  <span className="text-[11px] text-emerald-600 font-semibold">EU {selectedSize}</span>
-                )}
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                {sizes.map((size) => (
-                  <button
-                    key={size}
-                    type="button"
-                    onClick={() => handleSizeChange(size)}
-                    className={`min-h-[44px] rounded-xl text-xs font-semibold border transition-all touch-manipulation cursor-pointer ${
-                      selectedSize === size
-                        ? 'bg-gray-900 text-white border-gray-900 shadow-sm'
-                        : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300 hover:bg-gray-50 active:bg-gray-100'
-                    }`}
-                  >
-                    EU {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Filtro 3: Rango de Precio con Slider Visual */}
-            <div className="space-y-3">
+            {/* Filtro 4: Rango de Precio con Slider Visual */}
+            <div className="space-y-2.5">
               <div className="flex items-center justify-between">
                 <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
                   Precio Máximo
                 </h3>
                 <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
-                  S/ {maxPrice}
+                  Hasta S/ {maxPrice}
                 </span>
               </div>
               <input
                 type="range"
                 min="200"
-                max="600"
+                max="700"
                 step="10"
                 value={maxPrice}
                 onChange={(e) => handlePriceChange(Number(e.target.value))}
@@ -253,14 +329,14 @@ export const ProductGrid = () => {
               />
               <div className="flex justify-between text-[11px] text-gray-400">
                 <span>S/ 200</span>
-                <span>S/ 600</span>
+                <span>S/ 700</span>
               </div>
             </div>
 
             {/* Micro Banner de Asesoría en Sidebar */}
             <div className="bg-emerald-50/70 rounded-xl p-3.5 border border-emerald-100/70 text-xs text-emerald-800">
               <p className="font-semibold flex items-center gap-1.5">
-                <span>💬</span> ¿Dudas con tu talla?
+                <span>💬</span> ¿Dudas con tu modelo o talla?
               </p>
               <p className="text-emerald-700 mt-1">
                 Escríbenos directamente a WhatsApp y te asesoramos al instante.

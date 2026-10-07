@@ -49,6 +49,7 @@ export const Footer = ({
   const navLinks = [
     { label: 'Inicio', to: '/' },
     { label: 'Nosotros', to: '/#nosotros' },
+    { label: 'Nuestra Sede', to: '/#ubicacion' },
     { label: 'Productos', to: '/productos' },
   ];
 
@@ -83,7 +84,7 @@ export const Footer = ({
             </h3>
             <ul className="space-y-2.5 text-sm">
               {navLinks.map((link) => (
-                <li key={link.to}>
+                <li key={link.label}>
                   <Link
                     to={link.to}
                     className="inline-flex items-center gap-1.5 py-1 text-gray-400 hover:text-white hover:translate-x-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded touch-manipulation"
@@ -153,13 +154,23 @@ export const Footer = ({
 
         </div>
 
-        {/* Barra Inferior de Copyright */}
-        <div className="mt-12 pt-8 border-t border-gray-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+        {/* Barra Inferior de Copyright y Enlaces Legales */}
+        <div className="mt-12 pt-8 border-t border-gray-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400">
           <p className="text-center sm:text-left">
             © {currentYear} <span className="text-gray-300 font-medium">{brandName}</span>. Todos los derechos reservados.
           </p>
-          <div className="flex items-center gap-6 text-gray-400">
-            <span className="hover:text-gray-300 transition-colors">Diseñado para la mejor experiencia urbana</span>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 text-gray-400">
+            <Link to="/privacidad" className="hover:text-emerald-400 transition-colors">
+              Política de Privacidad
+            </Link>
+            <span className="text-gray-700">•</span>
+            <Link to="/terminos" className="hover:text-emerald-400 transition-colors">
+              Términos y Condiciones
+            </Link>
+            <span className="text-gray-700">•</span>
+            <Link to="/cookies" className="hover:text-emerald-400 transition-colors">
+              Política de Cookies
+            </Link>
           </div>
         </div>
 

@@ -6,14 +6,20 @@ import HeroSection from './components/sections/HeroSection.jsx';
 import AboutUs from './components/sections/AboutUs.jsx';
 import ProductGrid from './components/sections/ProductGrid.jsx';
 import ProductDetail from './components/sections/ProductDetail.jsx';
+import StoreLocation from './components/sections/StoreLocation.jsx';
+import PrivacyPolicy from './components/legal/PrivacyPolicy.jsx';
+import TermsAndConditions from './components/legal/TermsAndConditions.jsx';
+import CookiePolicy from './components/legal/CookiePolicy.jsx';
+import CookieBanner from './components/legal/CookieBanner.jsx';
 
 /**
- * Vista de Inicio (Home) con Portada y sección Nosotros.
+ * Vista de Inicio (Home) con Portada, sección Nosotros y Ubicación oficial.
  */
 const HomePage = () => (
   <>
     <HeroSection />
     <AboutUs />
+    <StoreLocation />
   </>
 );
 
@@ -34,6 +40,10 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/productos" element={<ProductGrid />} />
             <Route path="/producto/:id" element={<ProductDetail />} />
+            <Route path="/ubicacion" element={<StoreLocation />} />
+            <Route path="/privacidad" element={<PrivacyPolicy />} />
+            <Route path="/terminos" element={<TermsAndConditions />} />
+            <Route path="/cookies" element={<CookiePolicy />} />
             {/* Fallback para rutas inexistentes */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
@@ -41,6 +51,9 @@ function App() {
 
         {/* Footer persistente en todas las rutas */}
         <Footer />
+
+        {/* Banner Global de Consentimiento de Cookies */}
+        <CookieBanner />
       </div>
     </Router>
   );
