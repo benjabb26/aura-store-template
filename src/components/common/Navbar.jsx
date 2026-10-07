@@ -30,6 +30,7 @@ export const Navbar = ({
   whatsappLink
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const [mobileBrandsOpen, setMobileBrandsOpen] = useState(false);
   const location = useLocation();
@@ -58,11 +59,17 @@ export const Navbar = ({
   // Cierre con Escape y al redimensionar a desktop
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape') setIsOpen(false);
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+        setMobileProductsOpen(false);
+        setMobileCategoriesOpen(false);
+        setMobileBrandsOpen(false);
+      }
     };
     const handleResize = () => {
       if (window.innerWidth >= 768) {
         setIsOpen(false);
+        setMobileProductsOpen(false);
         setMobileCategoriesOpen(false);
         setMobileBrandsOpen(false);
       }
@@ -81,6 +88,7 @@ export const Navbar = ({
 
   const handleLinkClick = () => {
     setIsOpen(false);
+    setMobileProductsOpen(false);
     setMobileCategoriesOpen(false);
     setMobileBrandsOpen(false);
   };
@@ -242,7 +250,17 @@ export const Navbar = ({
 
           <button
             type="button"
-            onClick={() => setIsOpen((prev) => !prev)}
+            onClick={() => {
+              setIsOpen((prev) => {
+                const next = !prev;
+                if (!next) {
+                  setMobileProductsOpen(false);
+                  setMobileCategoriesOpen(false);
+                  setMobileBrandsOpen(false);
+                }
+                return next;
+              });
+            }}
             aria-expanded={isOpen}
             aria-controls="mobile-nav-dropdown"
             aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
@@ -293,6 +311,125 @@ export const Navbar = ({
             </svg>
           </Link>
 
+          {/* Bloque Móvil: Productos con Acordeón Principal */}
+          <div className="flex flex-col">
+            <button
+              type="button"
+              onClick={() => setMobileProductsOpen((prev) => !prev)}
+              aria-expanded={mobileProductsOpen}
+              className="w-full min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-medium text-gray-800 hover:text-gray-950 hover:bg-gray-100/70 active:bg-gray-200/50 transition-colors touch-manipulation"
+            >
+              <span>Productos</span>
+              <svg
+                className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+                  mobileProductsOpen ? 'rotate-180' : ''
+                }`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {/* Contenido Desplegable de Productos */}
+            {mobileProductsOpen && (
+              <div className="pl-3 pr-1 py-1 space-y-1 bg-gray-50/70 rounded-xl my-1 border border-gray-100/80">
+                {/* 1. Ver Todo el Catálogo */}
+                <Link
+                  to="/productos"
+                  onClick={handleLinkClick}
+                  className="min-h-[44px] px-3.5 py-2.5 rounded-lg flex items-center justify-between text-sm font-semibold text-gray-900 bg-white hover:bg-gray-100 active:bg-gray-200 shadow-xs border border-gray-100/80 transition-colors touch-manipulation"
+                >
+                  <span>Ver Todo el Catálogo</span>
+                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full">
+                    Explorar
+                  </span>
+                </Link>
+
+                {/* 2. Acordeón Móvil: Categorías */}
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => setMobileCategoriesOpen((prev) => !prev)}
+                    aria-expanded={mobileCategoriesOpen}
+                    className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg flex items-center justify-between text-sm font-semibold text-gray-700 hover:bg-gray-100/70 active:bg-gray-200 transition-colors touch-manipulation"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span>🏷️</span>
+                      <span>Categorías</span>
+                    </span>
+                    <svg
+                      className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+                        mobileCategoriesOpen ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  {mobileCategoriesOpen && (
+                    <div className="pl-5 pr-2 py-1 space-y-1 bg-white/80 rounded-lg mb-1 border border-gray-100">
+                      {NAV_CATEGORIES.map((cat) => (
+                        <Link
+                          key={cat}
+                          to={`/productos?categoria=${encodeURIComponent(cat)}`}
+                          onClick={handleLinkClick}
+                          className="block px-3 py-2 text-xs font-medium text-gray-600 hover:text-emerald-700 hover:bg-emerald-50/50 active:text-emerald-800 rounded-md transition-colors"
+                        >
+                          {cat}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* 3. Acordeón Móvil: Marcas */}
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => setMobileBrandsOpen((prev) => !prev)}
+                    aria-expanded={mobileBrandsOpen}
+                    className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg flex items-center justify-between text-sm font-semibold text-gray-700 hover:bg-gray-100/70 active:bg-gray-200 transition-colors touch-manipulation"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span>👟</span>
+                      <span>Marcas</span>
+                    </span>
+                    <svg
+                      className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+                        mobileBrandsOpen ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  {mobileBrandsOpen && (
+                    <div className="pl-5 pr-2 py-1 grid grid-cols-2 gap-1 bg-white/80 rounded-lg mb-1 border border-gray-100">
+                      {NAV_BRANDS.map((brand) => (
+                        <Link
+                          key={brand}
+                          to={`/productos?marca=${encodeURIComponent(brand)}`}
+                          onClick={handleLinkClick}
+                          className="block px-3 py-2 text-xs font-medium text-gray-600 hover:text-emerald-700 hover:bg-emerald-50/50 active:text-emerald-800 rounded-md truncate transition-colors"
+                        >
+                          {brand}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
           <Link
             to="/#ubicacion"
             onClick={handleLinkClick}
@@ -303,95 +440,6 @@ export const Navbar = ({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </Link>
-
-          {/* Bloque Móvil Productos */}
-          <div className="pt-2 border-t border-gray-100">
-            <Link
-              to="/productos"
-              onClick={handleLinkClick}
-              className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-bold text-gray-900 bg-gray-50/70 hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation"
-            >
-              <span>Ver Todo el Catálogo</span>
-              <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full">
-                Explorar
-              </span>
-            </Link>
-
-            {/* Acordeón Móvil: Categorías */}
-            <div className="mt-1">
-              <button
-                type="button"
-                onClick={() => setMobileCategoriesOpen(prev => !prev)}
-                className="w-full min-h-[46px] px-4 py-2.5 rounded-xl flex items-center justify-between text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors touch-manipulation"
-              >
-                <span className="flex items-center gap-2">
-                  <span>🏷️</span>
-                  <span>Categorías</span>
-                </span>
-                <svg
-                  className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${mobileCategoriesOpen ? 'rotate-180' : ''}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-
-              {mobileCategoriesOpen && (
-                <div className="pl-6 pr-2 py-1 space-y-1 bg-gray-50/50 rounded-xl mb-1">
-                  {NAV_CATEGORIES.map((cat) => (
-                    <Link
-                      key={cat}
-                      to={`/productos?categoria=${encodeURIComponent(cat)}`}
-                      onClick={handleLinkClick}
-                      className="block px-3 py-2 text-xs font-medium text-gray-600 hover:text-emerald-700 active:text-emerald-800 rounded-lg"
-                    >
-                      {cat}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Acordeón Móvil: Marcas */}
-            <div className="mt-1">
-              <button
-                type="button"
-                onClick={() => setMobileBrandsOpen(prev => !prev)}
-                className="w-full min-h-[46px] px-4 py-2.5 rounded-xl flex items-center justify-between text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors touch-manipulation"
-              >
-                <span className="flex items-center gap-2">
-                  <span>👟</span>
-                  <span>Marcas</span>
-                </span>
-                <svg
-                  className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${mobileBrandsOpen ? 'rotate-180' : ''}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-
-              {mobileBrandsOpen && (
-                <div className="pl-6 pr-2 py-1 grid grid-cols-2 gap-1 bg-gray-50/50 rounded-xl mb-1">
-                  {NAV_BRANDS.map((brand) => (
-                    <Link
-                      key={brand}
-                      to={`/productos?marca=${encodeURIComponent(brand)}`}
-                      onClick={handleLinkClick}
-                      className="block px-3 py-2 text-xs font-medium text-gray-600 hover:text-emerald-700 active:text-emerald-800 rounded-lg truncate"
-                    >
-                      {brand}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-          </div>
         </div>
       </div>
     </header>
