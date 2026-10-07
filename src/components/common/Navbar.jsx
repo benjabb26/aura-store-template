@@ -18,6 +18,10 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
+// Categorías y marcas oficiales para navegación
+const NAV_CATEGORIES = ['Running', 'Casual', 'Vestir', 'Urbano', 'Deportivo', 'Edición Limitada'];
+const NAV_BRANDS = ['Nike', 'Adidas', 'Puma', 'New Balance', 'Jordan', 'Asics', 'Converse', 'Vans'];
+
 /**
  * Componente Navbar responsive optimizado para smartphones (320px-390px) y pantallas retina.
  */
@@ -26,6 +30,8 @@ export const Navbar = ({
   whatsappLink
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
+  const [mobileBrandsOpen, setMobileBrandsOpen] = useState(false);
   const location = useLocation();
 
   const brandName = businessName || siteConfig?.businessName || 'Aura Store';
@@ -55,7 +61,11 @@ export const Navbar = ({
       if (event.key === 'Escape') setIsOpen(false);
     };
     const handleResize = () => {
-      if (window.innerWidth >= 768) setIsOpen(false);
+      if (window.innerWidth >= 768) {
+        setIsOpen(false);
+        setMobileCategoriesOpen(false);
+        setMobileBrandsOpen(false);
+      }
     };
 
     if (isOpen) {
@@ -71,6 +81,8 @@ export const Navbar = ({
 
   const handleLinkClick = () => {
     setIsOpen(false);
+    setMobileCategoriesOpen(false);
+    setMobileBrandsOpen(false);
   };
 
   return (
@@ -114,7 +126,7 @@ export const Navbar = ({
             Ubicación
           </Link>
 
-          {/* Enlace Productos con Menú Desplegable Flotante y Hover Bridge */}
+          {/* Enlace Productos con Menú Desplegable Multinivel (Categorías y Marcas) */}
           <div className="relative group">
             <Link
               to="/productos"
@@ -133,35 +145,82 @@ export const Navbar = ({
               </svg>
             </Link>
 
-            {/* Contenedor Flotante con Hover Bridge */}
+            {/* Contenedor Flotante Principal con Hover Bridge */}
             <div className="absolute top-full left-0 pt-2.5 hidden group-hover:block z-50 transition-all duration-200">
-              <div className="flex flex-col bg-white/95 backdrop-blur-xl border border-gray-100 shadow-xl rounded-2xl p-2 min-w-[210px] animate-fadeIn">
+              <div className="flex flex-col bg-white/95 backdrop-blur-xl border border-gray-100 shadow-xl rounded-2xl p-2 min-w-[220px] animate-fadeIn">
+                {/* 1. Ver Todo el Catálogo */}
                 <Link
                   to="/productos"
                   className="px-3.5 py-2 text-xs font-semibold text-gray-800 hover:text-emerald-700 hover:bg-emerald-50/70 rounded-xl transition-colors flex items-center justify-between"
                 >
-                  <span>Ver Catálogo Completo</span>
+                  <span>Ver Todo el Catálogo</span>
                   <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded-full font-bold">Todo</span>
                 </Link>
+
                 <div className="h-px bg-gray-100 my-1"></div>
-                <Link
-                  to="/productos"
-                  className="px-3.5 py-2 text-xs font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-colors"
-                >
-                  Running
-                </Link>
-                <Link
-                  to="/productos"
-                  className="px-3.5 py-2 text-xs font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-colors"
-                >
-                  Casuales
-                </Link>
-                <Link
-                  to="/productos"
-                  className="px-3.5 py-2 text-xs font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-colors"
-                >
-                  Edición Limitada
-                </Link>
+
+                {/* 2. Rama "Categorías" con submenú en cascada a la derecha */}
+                <div className="relative group/cat">
+                  <div className="px-3.5 py-2 text-xs font-semibold text-gray-700 hover:text-emerald-700 hover:bg-emerald-50/70 rounded-xl transition-colors flex items-center justify-between cursor-pointer select-none">
+                    <span className="flex items-center gap-1.5">
+                      <span>🏷️</span>
+                      <span>Categorías</span>
+                    </span>
+                    <svg className="w-3.5 h-3.5 text-gray-400 group-hover/cat:text-emerald-600 transition-transform group-hover/cat:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+
+                  {/* Sub-desplegable en cascada con Hover Bridge invisible (pl-2) */}
+                  <div className="absolute left-full top-0 -mt-1 pl-2 hidden group-hover/cat:block z-50 transition-all duration-200">
+                    <div className="flex flex-col bg-white/95 backdrop-blur-xl border border-gray-100 shadow-xl rounded-2xl p-2 min-w-[190px] animate-fadeIn">
+                      <span className="px-3 py-1 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+                        Por Estilo
+                      </span>
+                      {NAV_CATEGORIES.map((cat) => (
+                        <Link
+                          key={cat}
+                          to={`/productos?categoria=${encodeURIComponent(cat)}`}
+                          className="px-3.5 py-1.5 text-xs font-medium text-gray-600 hover:text-emerald-700 hover:bg-emerald-50/70 rounded-xl transition-colors"
+                        >
+                          {cat}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Rama "Marcas" con submenú en cascada a la derecha */}
+                <div className="relative group/brand">
+                  <div className="px-3.5 py-2 text-xs font-semibold text-gray-700 hover:text-emerald-700 hover:bg-emerald-50/70 rounded-xl transition-colors flex items-center justify-between cursor-pointer select-none">
+                    <span className="flex items-center gap-1.5">
+                      <span>👟</span>
+                      <span>Marcas</span>
+                    </span>
+                    <svg className="w-3.5 h-3.5 text-gray-400 group-hover/brand:text-emerald-600 transition-transform group-hover/brand:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+
+                  {/* Sub-desplegable en cascada con Hover Bridge invisible (pl-2) */}
+                  <div className="absolute left-full top-0 -mt-1 pl-2 hidden group-hover/brand:block z-50 transition-all duration-200">
+                    <div className="flex flex-col bg-white/95 backdrop-blur-xl border border-gray-100 shadow-xl rounded-2xl p-2 min-w-[190px] animate-fadeIn">
+                      <span className="px-3 py-1 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+                        Marcas Oficiales
+                      </span>
+                      {NAV_BRANDS.map((brand) => (
+                        <Link
+                          key={brand}
+                          to={`/productos?marca=${encodeURIComponent(brand)}`}
+                          className="px-3.5 py-1.5 text-xs font-medium text-gray-600 hover:text-emerald-700 hover:bg-emerald-50/70 rounded-xl transition-colors"
+                        >
+                          {brand}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -202,7 +261,7 @@ export const Navbar = ({
         </div>
       </nav>
 
-      {/* Menú Desplegable Móvil con scroll vertical seguro en pantallas pequeñas */}
+      {/* Menú Desplegable Móvil con scroll vertical seguro y submenús acordeón */}
       <div
         id="mobile-nav-dropdown"
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-gray-200/40 bg-white/95 backdrop-blur-2xl shadow-xl supports-[backdrop-filter]:bg-white/90 ${
@@ -245,16 +304,94 @@ export const Navbar = ({
             </svg>
           </Link>
 
-          <Link
-            to="/productos"
-            onClick={handleLinkClick}
-            className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-medium text-gray-800 hover:text-gray-950 hover:bg-gray-100/70 active:bg-gray-200/50 transition-colors touch-manipulation"
-          >
-            <span>Productos</span>
-            <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
+          {/* Bloque Móvil Productos */}
+          <div className="pt-2 border-t border-gray-100">
+            <Link
+              to="/productos"
+              onClick={handleLinkClick}
+              className="min-h-[48px] px-4 py-3 rounded-xl flex items-center justify-between text-base font-bold text-gray-900 bg-gray-50/70 hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation"
+            >
+              <span>Ver Todo el Catálogo</span>
+              <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full">
+                Explorar
+              </span>
+            </Link>
+
+            {/* Acordeón Móvil: Categorías */}
+            <div className="mt-1">
+              <button
+                type="button"
+                onClick={() => setMobileCategoriesOpen(prev => !prev)}
+                className="w-full min-h-[46px] px-4 py-2.5 rounded-xl flex items-center justify-between text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors touch-manipulation"
+              >
+                <span className="flex items-center gap-2">
+                  <span>🏷️</span>
+                  <span>Categorías</span>
+                </span>
+                <svg
+                  className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${mobileCategoriesOpen ? 'rotate-180' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {mobileCategoriesOpen && (
+                <div className="pl-6 pr-2 py-1 space-y-1 bg-gray-50/50 rounded-xl mb-1">
+                  {NAV_CATEGORIES.map((cat) => (
+                    <Link
+                      key={cat}
+                      to={`/productos?categoria=${encodeURIComponent(cat)}`}
+                      onClick={handleLinkClick}
+                      className="block px-3 py-2 text-xs font-medium text-gray-600 hover:text-emerald-700 active:text-emerald-800 rounded-lg"
+                    >
+                      {cat}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Acordeón Móvil: Marcas */}
+            <div className="mt-1">
+              <button
+                type="button"
+                onClick={() => setMobileBrandsOpen(prev => !prev)}
+                className="w-full min-h-[46px] px-4 py-2.5 rounded-xl flex items-center justify-between text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors touch-manipulation"
+              >
+                <span className="flex items-center gap-2">
+                  <span>👟</span>
+                  <span>Marcas</span>
+                </span>
+                <svg
+                  className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${mobileBrandsOpen ? 'rotate-180' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {mobileBrandsOpen && (
+                <div className="pl-6 pr-2 py-1 grid grid-cols-2 gap-1 bg-gray-50/50 rounded-xl mb-1">
+                  {NAV_BRANDS.map((brand) => (
+                    <Link
+                      key={brand}
+                      to={`/productos?marca=${encodeURIComponent(brand)}`}
+                      onClick={handleLinkClick}
+                      className="block px-3 py-2 text-xs font-medium text-gray-600 hover:text-emerald-700 active:text-emerald-800 rounded-lg truncate"
+                    >
+                      {brand}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+          </div>
         </div>
       </div>
     </header>

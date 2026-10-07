@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
 import productsData from '../../data/products.json';
 
 // Fallbacks de alta definición para calzado en caso de que assets no carguen
@@ -21,12 +21,15 @@ const parsePrice = (priceStr) => {
 };
 
 /**
- * Componente ProductGrid con Paginación Estricta (30 items por página) y Filtros Dinámicos.
- * El catálogo presenta botones "Ver más" que dirigen al usuario a la vista de detalle PDP.
+ * Componente ProductGrid con Paginación Estricta (30 items por página) y Filtros Simultáneos Multi-Selección.
+ * Permite seleccionar múltiples marcas a la vez (ej. Nike Y Adidas) y múltiples categorías simultáneamente.
  */
 export const ProductGrid = () => {
-  const [selectedCategory, setSelectedCategory] = useState('Todas');
-  const [selectedBrand, setSelectedBrand] = useState('Todas');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Estados de filtros multi-selección (arreglos)
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
   const [maxPrice, setMaxPrice] = useState(700);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,29 +37,53 @@ export const ProductGrid = () => {
 
   const itemsPerPage = 30;
 
-  const categories = ['Todas', 'Running', 'Casual', 'Vestir', 'Urbano', 'Deportivo', 'Edición Limitada'];
-  const brands = ['Todas', 'Nike', 'Adidas', 'Puma', 'New Balance', 'Jordan', 'Asics', 'Converse', 'Vans'];
+  const categories = ['Running', 'Casual', 'Vestir', 'Urbano', 'Deportivo', 'Edición Limitada'];
+  const brands = ['Nike', 'Adidas', 'Puma', 'New Balance', 'Jordan', 'Asics', 'Converse', 'Vans'];
+
+  // Sincronización bidireccional con Query Params (?categoria=... & ?marca=...)
+  useEffect(() => {
+    const catParam = searchParams.get('categoria');
+    const brandParam = searchParams.get('marca');
+
+    if (catParam) {
+      setSelectedCategories(prev => {
+        const match = categories.find(c => c.toLowerCase() === catParam.toLowerCase()) || catParam;
+        return prev.includes(match) ? prev : [...prev, match];
+      });
+    }
+
+    if (brandParam) {
+      setSelectedBrands(prev => {
+        const match = brands.find(b => b.toLowerCase() === brandParam.toLowerCase()) || brandParam;
+        return prev.includes(match) ? prev : [...prev, match];
+      });
+    }
+  }, [searchParams]);
 
   // Contabilizar filtros activos
   const activeFiltersCount =
-    (selectedCategory !== 'Todas' ? 1 : 0) +
-    (selectedBrand !== 'Todas' ? 1 : 0) +
+    selectedCategories.length +
+    selectedBrands.length +
     (maxPrice < 700 ? 1 : 0) +
     (searchTerm.trim() ? 1 : 0);
 
-  // Filtrado de productos antes de la paginación con lógica combinada
+  // Filtrado de productos simultáneo con soporte multi-selección
   const filteredProducts = productsData.filter((product) => {
+    // Categoría: si no hay seleccionadas, pasan todas. Si hay seleccionadas, debe coincidir con alguna.
     const matchCategory =
-      selectedCategory === 'Todas' ||
-      (product.category && product.category.toLowerCase() === selectedCategory.toLowerCase());
+      selectedCategories.length === 0 ||
+      (product.category && selectedCategories.some(c => c.toLowerCase() === product.category.toLowerCase()));
 
+    // Marca: si no hay seleccionadas, pasan todas. Si hay seleccionadas, debe coincidir con alguna (ej. Nike O Adidas).
     const matchBrand =
-      selectedBrand === 'Todas' ||
-      (product.brand && product.brand.toLowerCase() === selectedBrand.toLowerCase());
+      selectedBrands.length === 0 ||
+      (product.brand && selectedBrands.some(b => b.toLowerCase() === product.brand.toLowerCase()));
 
+    // Precio: slider estricto
     const numericPrice = parsePrice(product.price);
     const matchPrice = numericPrice <= maxPrice;
 
+    // Buscador de texto reactivo
     const matchSearch =
       !searchTerm.trim() ||
       product.name.toLowerCase().includes(searchTerm.toLowerCase().trim()) ||
@@ -75,14 +102,28 @@ export const ProductGrid = () => {
     Math.min(indexOfLastProduct, filteredProducts.length)
   );
 
-  // Manejadores con reset de paginación
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
+  // Manejadores interactivos de filtros múltiples
+  const handleToggleCategory = (category) => {
+    setSelectedCategories(prev =>
+      prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category]
+    );
     setCurrentPage(1);
   };
 
-  const handleBrandChange = (brand) => {
-    setSelectedBrand(brand);
+  const handleClearCategories = () => {
+    setSelectedCategories([]);
+    setCurrentPage(1);
+  };
+
+  const handleToggleBrand = (brand) => {
+    setSelectedBrands(prev =>
+      prev.includes(brand) ? prev.filter(b => b !== brand) : [...prev, brand]
+    );
+    setCurrentPage(1);
+  };
+
+  const handleClearBrands = () => {
+    setSelectedBrands([]);
     setCurrentPage(1);
   };
 
@@ -107,11 +148,12 @@ export const ProductGrid = () => {
   };
 
   const handleResetFilters = () => {
-    setSelectedCategory('Todas');
-    setSelectedBrand('Todas');
+    setSelectedCategories([]);
+    setSelectedBrands([]);
     setMaxPrice(700);
     setSearchTerm('');
     setCurrentPage(1);
+    setSearchParams({}, { replace: true });
   };
 
   const handleImageError = (event, index) => {
@@ -235,7 +277,7 @@ export const ProductGrid = () => {
                       setSearchTerm('');
                       setCurrentPage(1);
                     }}
-                    className="absolute right-2.5 top-2.5 text-gray-400 hover:text-gray-600 text-xs p-0.5"
+                    className="absolute right-2.5 top-2.5 text-gray-400 hover:text-gray-600 text-xs p-0.5 cursor-pointer"
                     aria-label="Limpiar búsqueda"
                   >
                     ✕
@@ -244,67 +286,109 @@ export const ProductGrid = () => {
               </div>
             </div>
 
-            {/* Filtro 2: Marcas */}
+            {/* Filtro 2: Marcas (Multi-selección simultánea) */}
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-                  Marca
+                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
+                  <span>Marcas</span>
+                  {selectedBrands.length > 0 && (
+                    <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded-full font-bold">
+                      {selectedBrands.length}
+                    </span>
+                  )}
                 </h3>
-                {selectedBrand !== 'Todas' && (
-                  <span className="text-[11px] text-emerald-600 font-semibold">{selectedBrand}</span>
+                {selectedBrands.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleClearBrands}
+                    className="text-[11px] text-emerald-600 hover:text-emerald-700 font-semibold cursor-pointer"
+                  >
+                    Limpiar
+                  </button>
                 )}
               </div>
               <div className="flex flex-wrap gap-1.5">
-                {brands.map((brand) => (
-                  <button
-                    key={brand}
-                    type="button"
-                    onClick={() => handleBrandChange(brand)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all touch-manipulation cursor-pointer ${
-                      selectedBrand === brand
-                        ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
-                        : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-gray-300 hover:bg-gray-100'
-                    }`}
-                  >
-                    {brand}
-                  </button>
-                ))}
+                {brands.map((brand) => {
+                  const isSelected = selectedBrands.includes(brand);
+                  return (
+                    <button
+                      key={brand}
+                      type="button"
+                      onClick={() => handleToggleBrand(brand)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all inline-flex items-center gap-1.5 touch-manipulation cursor-pointer ${
+                        isSelected
+                          ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm shadow-emerald-600/20'
+                          : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-gray-300 hover:bg-gray-100'
+                      }`}
+                      aria-pressed={isSelected}
+                    >
+                      {isSelected && (
+                        <svg className="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                      <span>{brand}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Filtro 3: Categorías */}
+            {/* Filtro 3: Categorías (Multi-selección simultánea) */}
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-                  Categoría
+                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
+                  <span>Categorías</span>
+                  {selectedCategories.length > 0 && (
+                    <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded-full font-bold">
+                      {selectedCategories.length}
+                    </span>
+                  )}
                 </h3>
-                {selectedCategory !== 'Todas' && (
-                  <span className="text-[11px] text-emerald-600 font-semibold">{selectedCategory}</span>
+                {selectedCategories.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleClearCategories}
+                    className="text-[11px] text-emerald-600 hover:text-emerald-700 font-semibold cursor-pointer"
+                  >
+                    Limpiar
+                  </button>
                 )}
               </div>
-              <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
-                {categories.map((cat) => (
-                  <label
-                    key={cat}
-                    onClick={() => handleCategoryChange(cat)}
-                    className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs cursor-pointer select-none transition-colors ${
-                      selectedCategory === cat
-                        ? 'bg-emerald-50 text-emerald-900 font-bold'
-                        : 'text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    <span className="flex items-center gap-2">
-                      <input
-                        type="radio"
-                        name="category"
-                        checked={selectedCategory === cat}
-                        onChange={() => handleCategoryChange(cat)}
-                        className="w-3.5 h-3.5 text-emerald-600 border-gray-300 focus:ring-emerald-500 accent-emerald-600 cursor-pointer"
-                      />
-                      <span>{cat}</span>
-                    </span>
-                  </label>
-                ))}
+              <div className="space-y-1.5 max-h-52 overflow-y-auto pr-1">
+                {categories.map((cat) => {
+                  const isSelected = selectedCategories.includes(cat);
+                  return (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => handleToggleCategory(cat)}
+                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs cursor-pointer select-none transition-colors border text-left ${
+                        isSelected
+                          ? 'bg-emerald-50 text-emerald-900 border-emerald-200 font-bold'
+                          : 'text-gray-700 hover:bg-gray-50 border-transparent'
+                      }`}
+                      aria-pressed={isSelected}
+                    >
+                      <span className="flex items-center gap-2">
+                        <span
+                          className={`w-4 h-4 rounded flex items-center justify-center border transition-colors ${
+                            isSelected
+                              ? 'bg-emerald-600 border-emerald-600 text-white'
+                              : 'bg-white border-gray-300'
+                          }`}
+                        >
+                          {isSelected && (
+                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                          )}
+                        </span>
+                        <span>{cat}</span>
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -346,6 +430,72 @@ export const ProductGrid = () => {
 
           {/* Columna Derecha: Catálogo de Zapatillas con Botón 'Ver más' */}
           <main className="lg:col-span-3 w-full flex flex-col">
+            {/* Chips de Filtros Activos Seleccionados */}
+            {(selectedBrands.length > 0 || selectedCategories.length > 0 || searchTerm.trim() || maxPrice < 700) && (
+              <div className="flex flex-wrap items-center gap-1.5 mb-6 p-3 bg-white rounded-xl border border-gray-100 shadow-sm text-xs">
+                <span className="text-gray-400 font-semibold mr-1">Filtros activos:</span>
+                {selectedBrands.map(b => (
+                  <span key={b} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    <span>{b}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleToggleBrand(b)}
+                      className="text-emerald-600 hover:text-emerald-950 ml-0.5 cursor-pointer font-extrabold text-sm leading-none"
+                      aria-label={`Quitar filtro ${b}`}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+                {selectedCategories.map(c => (
+                  <span key={c} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg font-bold bg-teal-50 text-teal-800 border border-teal-200">
+                    <span>{c}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleToggleCategory(c)}
+                      className="text-teal-600 hover:text-teal-950 ml-0.5 cursor-pointer font-extrabold text-sm leading-none"
+                      aria-label={`Quitar filtro ${c}`}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+                {searchTerm.trim() && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg font-bold bg-gray-100 text-gray-800 border border-gray-200">
+                    <span>"{searchTerm}"</span>
+                    <button
+                      type="button"
+                      onClick={() => { setSearchTerm(''); setCurrentPage(1); }}
+                      className="text-gray-600 hover:text-gray-950 ml-0.5 cursor-pointer font-extrabold text-sm leading-none"
+                      aria-label="Quitar búsqueda"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+                {maxPrice < 700 && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg font-bold bg-gray-100 text-gray-800 border border-gray-200">
+                    <span>Hasta S/ {maxPrice}</span>
+                    <button
+                      type="button"
+                      onClick={() => { setMaxPrice(700); setCurrentPage(1); }}
+                      className="text-gray-600 hover:text-gray-950 ml-0.5 cursor-pointer font-extrabold text-sm leading-none"
+                      aria-label="Restablecer precio máximo"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+                <button
+                  type="button"
+                  onClick={handleResetFilters}
+                  className="text-xs text-red-600 hover:text-red-700 font-bold ml-auto cursor-pointer underline py-1"
+                >
+                  Quitar todos
+                </button>
+              </div>
+            )}
+
             {currentProducts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                 {currentProducts.map((product, index) => {
