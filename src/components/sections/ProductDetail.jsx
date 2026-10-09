@@ -49,7 +49,11 @@ export const ProductDetail = () => {
   if (!product) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center px-4 py-20 text-center">
-        <span className="text-6xl">👟</span>
+        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gray-100 flex items-center justify-center text-gray-400 mb-2">
+          <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+          </svg>
+        </div>
         <h1 className="mt-4 text-2xl sm:text-3xl font-extrabold text-gray-900">
           Producto no encontrado
         </h1>
@@ -197,21 +201,35 @@ export const ProductDetail = () => {
             </p>
 
             {/* Viñetas de Detalles de Valor Técnicos */}
-            <div className="space-y-2.5 pt-4 border-t border-gray-100 text-xs sm:text-sm text-gray-600">
+            <div className="space-y-3 pt-4 border-t border-gray-100 text-xs sm:text-sm text-gray-600">
               <div className="flex items-start gap-2.5">
-                <span className="text-base">👟</span>
+                <div className="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
                 <div>
                   <strong className="text-gray-900">Material:</strong> Cuero sintético reforzado y tejido transpirable de alta resistencia.
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
-                <span className="text-base">☁️</span>
+                <div className="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
                 <div>
                   <strong className="text-gray-900">Comodidad:</strong> Suela ergonómica con tecnología de amortiguación reactiva antifatiga.
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
-                <span className="text-base">🎯</span>
+                <div className="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <circle cx="12" cy="12" r="9" />
+                    <circle cx="12" cy="12" r="3" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v3m0 12v3m9-9h-3M6 12H3" />
+                  </svg>
+                </div>
                 <div>
                   <strong className="text-gray-900">Ajuste:</strong> Calce anatómico urbano con sistema de cordones de sujeción firme.
                 </div>
@@ -268,16 +286,25 @@ export const ProductDetail = () => {
 
               {/* Micro-Garantías de Confianza */}
               <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs text-gray-400 font-medium pt-1">
-                <span className="flex items-center gap-1">
-                  <span>🔒</span> Compra segura
+                <span className="flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  <span>Compra segura</span>
                 </span>
                 <span className="hidden sm:inline">•</span>
-                <span className="flex items-center gap-1">
-                  <span>📦</span> Envíos a todo el país
+                <span className="flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                  <span>Envíos a todo el país</span>
                 </span>
                 <span className="hidden sm:inline">•</span>
-                <span className="flex items-center gap-1">
-                  <span>⚡</span> Respuesta rápida
+                <span className="flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  <span>Respuesta rápida</span>
                 </span>
               </div>
             </div>

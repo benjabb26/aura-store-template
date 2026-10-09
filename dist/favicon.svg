@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Fondo redondeado con alto contraste para pestañas claras y oscuras -->
+  <rect width="64" height="64" rx="16" fill="#111827"/>
+  
+  <!-- Entresuela con amortiguación en verde esmeralda (#059669) -->
+  <path d="M10 43C10 41.5 11.5 41 14 41H50C52.5 41 54 42.5 53.5 44.5C52.8 46.8 50 48.2 45 48.8C38 49.5 25 49.5 17 48.8C12.5 48.3 10 46.8 10 44.5V43Z" fill="#059669"/>
+  
+  <!-- Suela exterior de tracción profunda (#047857) -->
+  <path d="M12 47.5C16 48.6 25 49.2 34 49.2C42.5 49.2 49 48.5 51.5 47C51 49 47 50.8 40 51.3C32 51.8 21 51.8 14 50.3C12.5 49.8 12 48.7 12 47.5Z" fill="#047857"/>
+  
+  <!-- Cuerpo superior / Capellada de la zapatilla en blanco puro (#FFFFFF) -->
+  <path d="M13 40C12.5 35 15 27.5 20.5 23.5C22.2 22.3 24.2 22.5 25.8 24L29 27.5L37.5 31.5C42.5 33 47.5 35.5 51 38C52.8 39.2 53.5 40.2 52.5 41H13Z" fill="#FFFFFF"/>
+  
+  <!-- Cuello del talón y forro interno (#E5E7EB) -->
+  <path d="M19 24C17 26 15.8 29 15.5 33H24L25.5 27.5L22.5 24.5C21.2 23.5 20 23.5 19 24Z" fill="#E5E7EB"/>
+  
+  <!-- Franja aerodinámica de velocidad en verde esmeralda brillante (#10B981) -->
+  <path d="M19.5 35C25.5 34 34.5 34 44 38C37.5 40.5 28 41 19.5 39V35Z" fill="#10B981"/>
+  
+  <!-- Cordones deportivos en contraste (#111827) -->
+  <path d="M26.5 26.5L30 29M29.5 30L33.5 32.5" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
+</svg>

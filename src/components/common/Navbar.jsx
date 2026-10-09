@@ -18,6 +18,66 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
+/**
+ * Isotipo vectorial SVG estilizado de zapatilla deportiva para el logo de marca.
+ */
+const SneakerLogoIcon = ({ className = "w-7 h-7 text-emerald-600 shrink-0" }) => (
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.75"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      d="M2.5 17.5h19c.6 0 1-.4 1-1 0-1.7-1.2-3.1-2.9-3.4l-4.1-.9-1.8-2.8c-.4-.6-1.1-.9-1.8-.9H9.4c-1.1 0-2.1.7-2.4 1.7L5.3 15H3.5c-.6 0-1 .4-1 1v.5c0 .6.4 1 1 1z"
+      fill="currentColor"
+      fillOpacity="0.16"
+    />
+    <path d="M2.5 17.5h19c.6 0 1-.4 1-1 0-1.7-1.2-3.1-2.9-3.4l-4.1-.9-1.8-2.8c-.4-.6-1.1-.9-1.8-.9H9.4c-1.1 0-2.1.7-2.4 1.7L5.3 15H3.5c-.6 0-1 .4-1 1v.5c0 .6.4 1 1 1z" />
+    <path d="M2 19.5h20" strokeWidth="2" />
+    <path d="M10 11.5l1.5 2M12 12l1.5 2" />
+  </svg>
+);
+
+/**
+ * Ícono vectorial SVG para Categorías.
+ */
+const CategoryTagIcon = ({ className = "w-4 h-4 text-emerald-600 shrink-0" }) => (
+  <svg
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+  </svg>
+);
+
+/**
+ * Ícono vectorial SVG para Marcas.
+ */
+const BrandBadgeIcon = ({ className = "w-4 h-4 text-emerald-600 shrink-0" }) => (
+  <svg
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+  </svg>
+);
+
 // Categorías y marcas oficiales para navegación
 const NAV_CATEGORIES = ['Running', 'Casual', 'Vestir', 'Urbano', 'Deportivo', 'Edición Limitada'];
 const NAV_BRANDS = ['Nike', 'Adidas', 'Puma', 'New Balance', 'Jordan', 'Asics', 'Converse', 'Vans'];
@@ -104,9 +164,10 @@ export const Navbar = ({
           <Link
             to="/"
             onClick={handleLinkClick}
-            className="flex items-center gap-1.5 group text-gray-900 font-bold text-base sm:text-xl tracking-tight hover:text-gray-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 rounded-lg py-1 px-1 -ml-1"
+            className="flex items-center gap-2 group text-gray-900 font-bold text-base sm:text-xl tracking-tight hover:text-gray-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 rounded-lg py-1 px-1 -ml-1"
             aria-label={`${brandName} - Inicio`}
           >
+            <SneakerLogoIcon className="w-7 h-7 text-emerald-600 shrink-0 group-hover:scale-105 transition-transform duration-200" />
             <span className="truncate max-w-[130px] sm:max-w-none">{brandName}</span>
           </Link>
         </div>
@@ -170,8 +231,8 @@ export const Navbar = ({
                 {/* 2. Rama "Categorías" con submenú en cascada a la derecha */}
                 <div className="relative group/cat">
                   <div className="px-3.5 py-2 text-xs font-semibold text-gray-700 hover:text-emerald-700 hover:bg-emerald-50/70 rounded-xl transition-colors flex items-center justify-between cursor-pointer select-none">
-                    <span className="flex items-center gap-1.5">
-                      <span>🏷️</span>
+                    <span className="flex items-center gap-2">
+                      <CategoryTagIcon className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Categorías</span>
                     </span>
                     <svg className="w-3.5 h-3.5 text-gray-400 group-hover/cat:text-emerald-600 transition-transform group-hover/cat:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -201,8 +262,8 @@ export const Navbar = ({
                 {/* 3. Rama "Marcas" con submenú en cascada a la derecha */}
                 <div className="relative group/brand">
                   <div className="px-3.5 py-2 text-xs font-semibold text-gray-700 hover:text-emerald-700 hover:bg-emerald-50/70 rounded-xl transition-colors flex items-center justify-between cursor-pointer select-none">
-                    <span className="flex items-center gap-1.5">
-                      <span>👟</span>
+                    <span className="flex items-center gap-2">
+                      <BrandBadgeIcon className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Marcas</span>
                     </span>
                     <svg className="w-3.5 h-3.5 text-gray-400 group-hover/brand:text-emerald-600 transition-transform group-hover/brand:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -356,7 +417,7 @@ export const Navbar = ({
                     className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg flex items-center justify-between text-sm font-semibold text-gray-700 hover:bg-gray-100/70 active:bg-gray-200 transition-colors touch-manipulation"
                   >
                     <span className="flex items-center gap-2">
-                      <span>🏷️</span>
+                      <CategoryTagIcon className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Categorías</span>
                     </span>
                     <svg
@@ -396,7 +457,7 @@ export const Navbar = ({
                     className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg flex items-center justify-between text-sm font-semibold text-gray-700 hover:bg-gray-100/70 active:bg-gray-200 transition-colors touch-manipulation"
                   >
                     <span className="flex items-center gap-2">
-                      <span>👟</span>
+                      <BrandBadgeIcon className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Marcas</span>
                     </span>
                     <svg
